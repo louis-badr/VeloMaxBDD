@@ -8,6 +8,6 @@ namespace VeloMaxBDD
 {
     class Piece
     {
-
+        // test
     }
 }
