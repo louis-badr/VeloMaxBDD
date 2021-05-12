@@ -49,9 +49,14 @@ namespace VeloMaxBDD
         {
 
         }
-        public void set_desc_piece()
+        public void set_desc_piece(MySqlConnection connection,string new_desc_piece)
         {
-
+            connection.Open();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = $"update piece set desc_piece = \"{new_desc_piece}\" where no_piece = \"{this.no_piece}\";";
+            MySqlDataReader reader;
+            reader = command.ExecuteReader();
+            this.desc_piece = new_desc_piece;
         }
         public void set_date_intro_piece()
         {
