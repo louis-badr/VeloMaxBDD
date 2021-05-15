@@ -8,13 +8,13 @@ namespace VeloMaxBDD
 {
     class Commande
     {
-        int no_commande;
+        string no_commande;
         string date_commande;
         string adresse_livraison;
         string date_livraison;
         
 
-        public Commande(int no_commande, string date_commande, string adresse_livraison, string date_livraison)
+        public Commande(string no_commande, string date_commande, string adresse_livraison, string date_livraison)
         {
             this.no_commande = no_commande;
             this.date_commande = date_commande;
@@ -23,7 +23,7 @@ namespace VeloMaxBDD
       
 
         }
-        public int No_commande
+        public string No_commande
         {
             get { return no_commande; }
             set
