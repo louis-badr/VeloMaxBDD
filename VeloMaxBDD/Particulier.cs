@@ -34,9 +34,9 @@ namespace VeloMaxBDD
             get { return no_particulier; }
             set
             {
+                
+                Connection.update($"update Particulier set no_particulier=  '{value}' where no_particulier= '{ no_particulier}';");
                 no_particulier = value;
-                Connection.update("update Particulier set no_particulier=" + value + " where no_particulier=" + no_particulier);
-
             }
 
         }
@@ -45,9 +45,9 @@ namespace VeloMaxBDD
             get { return nom_particulier; }
             set
             {
+                
+                Connection.update($"update Particulier set nom_particulier= '{value}' where nom_particulier= '{nom_particulier}';");
                 nom_particulier = value;
-                Connection.update("update Particulier set nom_particulier=" + value + " where nom_particulier=" + nom_particulier);
-
             }
 
         }
@@ -56,9 +56,9 @@ namespace VeloMaxBDD
             get { return prenom_particulier; }
             set
             {
+                
+                Connection.update($"update Particulier set prenom_particulier= '{value}'  where prenom_particulier=  '{prenom_particulier}';");
                 prenom_particulier = value;
-                Connection.update("update Particulier set prenom_particulier=" + value + " where prenom_particulier=" + prenom_particulier);
-
             }
 
         }
@@ -67,9 +67,9 @@ namespace VeloMaxBDD
             get { return adresse_particulier; }
             set
             {
+                
+                Connection.update($"update Particulier set adresse_particulier= '{value}' where adresse_particulier= '{adresse_particulier}';");
                 adresse_particulier = value;
-                Connection.update("update Particulier set adresse_particulier=" + value + " where adresse_particulier=" + adresse_particulier);
-
             }
 
         }
@@ -78,9 +78,9 @@ namespace VeloMaxBDD
             get { return tel_particulier; }
             set
             {
+                
+                Connection.update($"update Particulier set tel_particulier= '{value}'  where tel_particulier=  '{tel_particulier}';");
                 tel_particulier = value;
-                Connection.update("update Particulier set tel_particulier=" + value + " where tel_particulier=" + tel_particulier);
-
             }
 
         }
@@ -89,9 +89,9 @@ namespace VeloMaxBDD
             get { return mail_particulier; }
             set
             {
+                
+                Connection.update($"update Particulier set mail_particulier='{ value}' where mail_particulier= '{ mail_particulier}';");
                 mail_particulier = value;
-                Connection.update("update Particulier set mail_particulier=" + value + " where mail_particulier=" + mail_particulier);
-
             }
 
         }
@@ -100,9 +100,9 @@ namespace VeloMaxBDD
             get { return date_souscription; }
             set
             {
+                
+                Connection.update($"update Particulier set date_souscription= '{value}' where date_souscription= '{date_souscription}';");
                 date_souscription = value;
-                Connection.update("update Particulier set date_souscription=" + value + " where date_souscription=" + date_souscription);
-
             }
 
         }
@@ -111,18 +111,18 @@ namespace VeloMaxBDD
             get { return no_programme; }
             set
             {
+                
+                Connection.update($"update Particulier set no_programme= '{value}' where no_programme= '{no_programme}';");
                 no_programme = value;
-                Connection.update("update Particulier set no_programme=" + value + " where no_programme=" + no_programme);
-
             }
 
         }
         public void CreateParticulier()
         {
 
-            Connection.update($"insert into Particulier values ('{no_particulier}','{nom_particulier}',{prenom_particulier}',{adresse_particulier}','{tel_particulier}','{mail_particulier}','{date_souscription}','{no_programme}');");
+            Connection.update($"insert into Particulier values ('{no_particulier}','{nom_particulier}','{prenom_particulier}','{adresse_particulier}','{tel_particulier}','{mail_particulier}','{date_souscription}','{no_programme}');");
             Console.WriteLine("Voici le particulier créé : \n");
-            Connection.select("select * from Particulier where no_particulier=" + no_particulier + ";");
+            Connection.select($"select * from Particulier where no_particulier= + '{no_particulier}' + ;");
         }
     }
 }

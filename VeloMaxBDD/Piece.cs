@@ -30,8 +30,9 @@ namespace VeloMaxBDD
             get { return no_piece; }
             set
             {
+               
+                Connection.update($"update piece set no_piece= '{value}' where no_piece= '{no_piece}';");
                 no_piece = value;
-                Connection.update("update piece set no_piece=" + value + " where no_piece=" + no_piece);
             }
         }
         public string Desc_piece
@@ -39,8 +40,9 @@ namespace VeloMaxBDD
             get { return desc_piece; }
             set
             {
+                
+                Connection.update($"update piece set desc_piece= '{value}' where no_piece= '{no_piece}';");
                 desc_piece = value;
-                Connection.update("update piece set desc_piece=" + value + " where no_piece=" +no_piece+";");
             }
         }
         public string Date_intro_piece
@@ -48,8 +50,9 @@ namespace VeloMaxBDD
             get { return date_intro_piece; }
             set
             {
+                
+                Connection.update($"update piece set date_intro_piece= '{value}' where no_piece= '{no_piece};");
                 date_intro_piece = value;
-                Connection.update("update piece set date_intro_piece=" + value + " where no_piece=" + no_piece + ";");
             }
         }
         public string Date_disco_piece
@@ -57,8 +60,9 @@ namespace VeloMaxBDD
             get { return date_disco_piece; }
             set
             {
+                
+                Connection.update($"update piece set date_disco_piece= '{value}' where no_piece= '{no_piece}';");
                 date_disco_piece = value;
-                Connection.update("update piece set date_disco_piece=" + value + " where no_piece=" + no_piece + ";");
             }
         }
         public int Stock
@@ -66,17 +70,18 @@ namespace VeloMaxBDD
             get { return stock; }
             set
             {
+                
+                Connection.update($"update piece stock= '{value}' where no_piece= '{no_piece}';");
                 stock = value;
-                Connection.update("update piece stock=" + value + " where no_piece=" + no_piece + ";");
             }
         }
         
         public void CreatePiece()
         {
             
-            Connection.update($"insert into Piece values ('{no_piece}','{desc_piece}',{date_intro_piece}',{date_disco_piece}','{stock}');");
+            Connection.update($"insert into Piece values ('{no_piece}','{desc_piece}','{date_intro_piece}','{date_disco_piece}','{stock}');");
             Console.WriteLine("Voici la pièce créée : \n");
-            Connection.select("select * from Piece where no_piece="+ no_piece+ ";");
+            Connection.select($"select * from Piece where no_piece= '{no_piece}' ;");
         }
     }
 }

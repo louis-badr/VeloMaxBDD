@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VeloMaxBDD
 {
@@ -21,16 +17,16 @@ namespace VeloMaxBDD
             this.contact_fournisseur = contact_fournisseur;
             this.adresse_fournisseur = adresse_fournisseur;
             this.note_fournisseur = note_fournisseur;
-            
+
         }
         public string Siret_fournisseur
         {
             get { return siret_fournisseur; }
             set
             {
-                siret_fournisseur = value;
-                Connection.update("update Fournisseur set siret_fournisseur=" + value + " where siret_fournisseur=" + siret_fournisseur);
 
+                Connection.update($"update Fournisseur set siret_fournisseur= '{value}' where siret_fournisseur= '{siret_fournisseur}';");
+                siret_fournisseur = value;
             }
 
         }
@@ -39,9 +35,9 @@ namespace VeloMaxBDD
             get { return nom_fournisseur; }
             set
             {
-                nom_fournisseur = value;
-                Connection.update("update Fournisseur set nom_fournisseur=" + value + " where nom_fournisseur=" + nom_fournisseur);
 
+                Connection.update($"update Fournisseur set nom_fournisseur= '{value}' where nom_fournisseur= '{nom_fournisseur}';");
+                nom_fournisseur = value;
             }
 
         }
@@ -50,9 +46,9 @@ namespace VeloMaxBDD
             get { return contact_fournisseur; }
             set
             {
-                contact_fournisseur = value;
-                Connection.update("update Fournisseur set contact_fournisseur=" + value + " where contact_fournisseur=" + contact_fournisseur);
 
+                Connection.update($"update Fournisseur set contact_fournisseur= { value}' where contact_fournisseur= '{contact_fournisseur}';");
+                contact_fournisseur = value;
             }
 
         }
@@ -61,9 +57,9 @@ namespace VeloMaxBDD
             get { return adresse_fournisseur; }
             set
             {
-                adresse_fournisseur = value;
-                Connection.update("update Fournisseur set adresse_fournisseur=" + value + " where adresse_fournisseur=" + adresse_fournisseur);
 
+                Connection.update($"update Fournisseur set adresse_fournisseur= '{value}' where adresse_fournisseur= '{adresse_fournisseur}';");
+                adresse_fournisseur = value;
             }
 
         }
@@ -72,18 +68,18 @@ namespace VeloMaxBDD
             get { return note_fournisseur; }
             set
             {
-                note_fournisseur = value;
-                Connection.update("update Fournisseur set note_fournisseur=" + value + " where note_fournisseur=" + note_fournisseur);
 
+                Connection.update($"update Fournisseur set note_fournisseur= '{value}' where note_fournisseur= '{note_fournisseur}';");
+                note_fournisseur = value;
             }
 
         }
         public void CreateFournisseur()
         {
 
-            Connection.update($"insert into Fournisseur values ('{siret_fournisseur}','{nom_fournisseur}',{contact_fournisseur}',{adresse_fournisseur}','{note_fournisseur}');");
+            Connection.update($"insert into Fournisseur values ('{siret_fournisseur}','{nom_fournisseur}','{contact_fournisseur}','{adresse_fournisseur}','{note_fournisseur}');");
             Console.WriteLine("Voici le fournisseur créé : \n");
-            Connection.select("select * from Fournisseur where nom_fournisseur=" + nom_fournisseur + ";");
+            Connection.select($"select * from Fournisseur where nom_fournisseur= + '{nom_fournisseur}' + ;");
         }
     }
 }

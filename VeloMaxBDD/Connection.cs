@@ -15,9 +15,20 @@ namespace VeloMaxBDD
             connection.Open();
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = mySQLCommand;
-            MySqlDataReader reader;
-            reader = command.ExecuteReader();
+            
+            try
+            {
+                command.ExecuteNonQuery();
+
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine(" ErreurConnexion : " + e.ToString());
+                Console.ReadLine();
+                return;
+            }
             connection.Close();
+            command.Dispose();
         }
         public static void select (string mySQLcommand)
         {
@@ -27,16 +38,16 @@ namespace VeloMaxBDD
             command.CommandText = mySQLcommand;
             MySqlDataReader reader;
             reader = command.ExecuteReader();
-            string[] valueString = new string[reader.FieldCount];
+            
             while (reader.Read())
             {
-
+                string currentRowAsString = "";
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    valueString[i] = reader.GetValue(i).ToString();
-                    Console.Write(valueString[i] + " , ");
+                    string valueAsString = reader.GetValue(i).ToString();
+                    currentRowAsString += valueAsString + ", ";
                 }
-                Console.WriteLine();
+                Console.WriteLine(currentRowAsString);
             }
             reader.Close();
             command.Dispose();
