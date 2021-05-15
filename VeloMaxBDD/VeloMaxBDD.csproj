@@ -90,6 +90,7 @@
     <Compile Include="Connection.cs" />
     <Compile Include="Fournisseur.cs" />
     <Compile Include="Modele.cs" />
+    <Compile Include="Particulier.cs" />
     <Compile Include="Piece.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
