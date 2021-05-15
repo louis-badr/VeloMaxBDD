@@ -93,6 +93,7 @@
     <Compile Include="Particulier.cs" />
     <Compile Include="Piece.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Commande.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
