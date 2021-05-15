@@ -11,16 +11,12 @@ namespace VeloMaxBDD
     {
         static void Main(string[] args)
         {
-
-
-            
-
             MySqlConnection connexion = null;
             try
             {
                 string connexionString = "SERVER=localhost;PORT=3306;" +
                                          "DATABASE=veloMax;" +
-                                         "UID=root;PASSWORD=Valou1234";
+                                         "UID=root;PASSWORD=root";
 
                 connexion = new MySqlConnection(connexionString);
                 connexion.Open();
@@ -30,12 +26,147 @@ namespace VeloMaxBDD
                 Console.WriteLine(" ErreurConnexion : " + e.ToString());
                 return;
             }
+
+
+
+
+
+            // lecture de la table fournisseur
+            List<Fournisseur> listeFournisseurs = new List<Fournisseur>();
+            string requete = "Select * from fournisseur;";
+            MySqlCommand command1 = connexion.CreateCommand();
+            command1.CommandText = requete;
+            MySqlDataReader reader = command1.ExecuteReader();
+            string[] valueString = new string[reader.FieldCount];
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount/5; i=i+5)
+                {
+                    listeFournisseurs.Add(new Fournisseur(reader.GetValue(i).ToString(), reader.GetValue(i + 1).ToString(), reader.GetValue(i+2).ToString(), reader.GetValue(i+3).ToString(), Convert.ToInt32(reader.GetValue(i+4).ToString())));
+                }
+            }
+            reader.Close();
+            command1.Dispose();
+
+            //foreach(Fournisseur fournisseur in listeFournisseurs)
+            //{
+            //    Console.WriteLine(fournisseur.Siret_fournisseur+ " | " + fournisseur.Nom_fournisseur+ " | " + fournisseur.Contact_fournisseur+ " | " + fournisseur.Adresse_fournisseur+ " | " + fournisseur.Note_fournisseur);
+            //}
+
+            // lecture de la table pièce
+            List<Piece> listePieces = new List<Piece>();
+            requete = "Select * from piece;";
+            MySqlCommand command2 = connexion.CreateCommand();
+            command2.CommandText = requete;
+            reader = command2.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount / 5; i = i + 5)
+                {
+                    listePieces.Add(new Piece(reader.GetValue(i).ToString(), reader.GetValue(i + 1).ToString(), reader.GetValue(i + 2).ToString(), reader.GetValue(i + 3).ToString(), Convert.ToInt32(reader.GetValue(i + 4).ToString())));
+                }
+            }
+            reader.Close();
+            command2.Dispose();
+
+            //foreach (Piece piece in listePieces)
+            //{
+            //    Console.WriteLine(piece.No_piece + " | " + piece.Desc_piece + " | " + piece.Date_intro_piece + " | " + piece.Date_disco_piece + " | " + piece.Stock);
+            //}
+
+            // lecture de la table boutique
+            List<Boutique> listeBoutiques = new List<Boutique>();
+            requete = "Select * from boutique;";
+            MySqlCommand command3 = connexion.CreateCommand();
+            command3.CommandText = requete;
+            reader = command3.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount / 7; i = i + 7)
+                {
+                    listeBoutiques.Add(new Boutique(reader.GetValue(i).ToString(), reader.GetValue(i + 1).ToString(), reader.GetValue(i + 2).ToString(), reader.GetValue(i + 3).ToString(), reader.GetValue(i + 4).ToString(), reader.GetValue(i + 5).ToString(), Convert.ToInt32(reader.GetValue(i + 6).ToString())));
+                }
+            }
+            reader.Close();
+            command3.Dispose();
+
+            //foreach (Boutique boutique in listeBoutiques)
+            //{
+            //    Console.WriteLine(boutique.No_boutique + " | " + boutique.Nom_boutique + " | " + boutique.Adresse_boutique + " | " + boutique.Tel_boutique + " | " + boutique.Mail_boutique + " | " + boutique.Contact_boutique + " | " + boutique.Remise_boutique);
+            //}
+
+            // lecture de la table commande
+            List<Commande> listeCommandes = new List<Commande>();
+            requete = "Select * from commande;";
+            MySqlCommand command4 = connexion.CreateCommand();
+            command4.CommandText = requete;
+            reader = command4.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount / 4; i = i + 4)
+                {
+                    listeCommandes.Add(new Commande(reader.GetValue(i).ToString(), reader.GetValue(i + 1).ToString(), reader.GetValue(i + 2).ToString(), reader.GetValue(i + 3).ToString()));
+                }
+            }
+            reader.Close();
+            command4.Dispose();
+
+            //foreach (Commande commande in listeCommandes)
+            //{
+            //    Console.WriteLine(commande.No_commande + " | " + commande.Date_commande + " | " + commande.Adresse_livraison + " | " + commande.Date_livraison);
+            //}
+
+            // lecture de la table modele
+            List<Modele> listeModeles = new List<Modele>();
+            requete = "Select * from modele;";
+            MySqlCommand command5 = connexion.CreateCommand();
+            command5.CommandText = requete;
+            reader = command5.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount / 7; i = i + 7)
+                {
+                    listeModeles.Add(new Modele(reader.GetValue(i).ToString(), reader.GetValue(i + 1).ToString(), reader.GetValue(i + 2).ToString(), Convert.ToInt32(reader.GetValue(i + 3).ToString()), reader.GetValue(i + 4).ToString(), reader.GetValue(i + 5).ToString(), reader.GetValue(i + 6).ToString()));
+                }
+            }
+            reader.Close();
+            command5.Dispose();
+
+            //foreach (Modele modele in listeModeles)
+            //{
+            //    Console.WriteLine(modele.No_modele + " | " + modele.Nom_modele + " | " + modele.Grandeur + " | " + modele.Prix_modele + " | " + modele.Ligne + " | " + modele.Date_intro_modele + " | " + modele.Date_disco_modele);
+            //}
+
+            // lecture de la table particulier
+            List<Particulier> listeParticuliers = new List<Particulier>();
+            requete = "Select * from particulier;";
+            MySqlCommand command6 = connexion.CreateCommand();
+            command6.CommandText = requete;
+            reader = command6.ExecuteReader();
+            valueString = new string[reader.FieldCount];
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount / 7; i = i + 7)
+                {
+                    listeParticuliers.Add(new Particulier(reader.GetValue(i).ToString(), reader.GetValue(i + 1).ToString(), reader.GetValue(i + 2).ToString(), reader.GetValue(i + 3).ToString(), reader.GetValue(i + 4).ToString(), reader.GetValue(i + 5).ToString(), reader.GetValue(i + 6).ToString(), Convert.ToInt32(reader.GetValue(i + 7).ToString())));
+                }
+            }
+            reader.Close();
+            command6.Dispose();
+
+            //foreach (Particulier particulier in listeParticuliers)
+            //{
+            //    Console.WriteLine(particulier.No_particulier + " | " + particulier.Nom_particulier + " | " + particulier.Prenom_particulier + " | " + particulier.Adresse_particulier + " | " + particulier.Tel_particulier + " | " + particulier.Mail_particulier + " | " + particulier.Date_souscription + " | " + particulier.No_programme);
+            //}
+
             Choix_interface();
             //exo(connexion);
             connexion.Close();
             Console.ReadKey();
-
-
         }
 
         static void Choix_interface()

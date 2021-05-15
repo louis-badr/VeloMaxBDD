@@ -8,7 +8,7 @@ namespace VeloMaxBDD
 
         public static string connectionString = "SERVER=localhost;PORT=3306;" +
                                          "DATABASE=veloMax;" +
-                                         "UID=root;PASSWORD=Valou1234";
+                                         "UID=root;PASSWORD=root";
         public static void update (string mySQLCommand)
         {
             MySqlConnection connection = new MySqlConnection(Connection.connectionString);

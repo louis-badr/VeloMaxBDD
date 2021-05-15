@@ -39,9 +39,8 @@ namespace VeloMaxBDD
             get { return nom_fournisseur; }
             set
             {
+                Connection.update("update Fournisseur set nom_fournisseur='" + value + "' where nom_fournisseur='" + nom_fournisseur+"';");
                 nom_fournisseur = value;
-                Connection.update("update Fournisseur set nom_fournisseur=" + value + " where nom_fournisseur=" + nom_fournisseur);
-
             }
 
         }
