@@ -11,6 +11,10 @@ namespace VeloMaxBDD
     {
         static void Main(string[] args)
         {
+
+
+            
+
             MySqlConnection connexion = null;
             try
             {
@@ -30,6 +34,8 @@ namespace VeloMaxBDD
             //exo(connexion);
             connexion.Close();
             Console.ReadKey();
+
+
         }
 
         static void Choix_interface()
@@ -46,12 +52,40 @@ namespace VeloMaxBDD
                     switch (caseSwitch2)
                     {
                         case 1:
-                            Console.WriteLine("yes");
+                            Console.WriteLine("Saisissez un numero de pièce");
+                            int No = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Saisissez une description");
+                            string desc = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une date d'introduction");
+                            string dateintro = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une date de discontinuation");
+                            string datedisco = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un stock");
+                            int stock = Convert.ToInt32(Console.ReadLine());
+                            Piece p1 = new Piece(No, desc, dateintro, datedisco, stock);
+                            p1.CreatePiece();
                             break;
                         case 2:
-                            Console.WriteLine("ok");
+                            Console.WriteLine("Saisissez le N° de pièce à supprimer" );
+                            int numsupp = Convert.ToInt32(Console.ReadLine());
+                            //Connection.update("delete from Piece where no_piece=" + numsupp + ";");
+                            Console.WriteLine("Pièce supprimée");
                             break;
                         case 3:
+                            Console.WriteLine("Voici toutes les pièces :");
+                            //Connection.select("select * from Piece);
+                            Console.WriteLine();
+                            Console.WriteLine("Quelle pièce voulez vous modifier ?");
+
+                            Console.WriteLine("Que voulez vous modifier ?");
+                            Console.WriteLine("1. N° Piece \n2. Description \n3. Date introduction \n4. Date introduction \n5. Date discontinuation \n6. Stock" );
+                            int numupdate = Convert.ToInt32(Console.ReadLine());
+                            if (numupdate == 1)
+                            {
+
+                            }
+                            //Connection.update("delete from Piece where no_piece=" + numsupp + ";");
+                            Console.WriteLine("Pièce supprimée");
                             Console.WriteLine("no");
                             break;
                     }
@@ -153,30 +187,10 @@ namespace VeloMaxBDD
                     break;
                     
             }
+
             
-
-        }
-        static void exo(MySqlConnection connexion)
-        {
-            Console.WriteLine("Saissez une piece");
-            string no_piece = Convert.ToString(Console.ReadLine());
-            string requete = $"Select stock from Piece where no_piece = \"{no_piece}\";";
-            MySqlCommand command1 = connexion.CreateCommand();
-            command1.CommandText = requete;
-            int stock = 0;
-            MySqlDataReader reader = command1.ExecuteReader();
-
-            string[] valueString = new string[reader.FieldCount];
-            while (reader.Read())
-            {
-                stock = Convert.ToInt32(reader["stock"]);
-                Console.WriteLine(stock);
-            }
-            if (stock == 0)
-            {
-                Console.WriteLine("La pièce n'existe pas");
-            }
-
+            
+            Console.ReadKey();
         }
     }
 }
