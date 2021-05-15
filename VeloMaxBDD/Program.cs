@@ -56,9 +56,9 @@ namespace VeloMaxBDD
                             string No = Convert.ToString(Console.ReadLine());
                             Console.WriteLine("Saisissez une description");
                             string desc = Convert.ToString(Console.ReadLine());
-                            Console.WriteLine("Saisissez une date d'introduction");
+                            Console.WriteLine("Saisissez une date d'introduction (JJ/MM/AAAA)");
                             string dateintro = Convert.ToString(Console.ReadLine());
-                            Console.WriteLine("Saisissez une date de discontinuation");
+                            Console.WriteLine("Saisissez une date de discontinuation (JJ/MM/AAAA)");
                             string datedisco = Convert.ToString(Console.ReadLine());
                             Console.WriteLine("Saisissez un stock");
                             int stock = Convert.ToInt32(Console.ReadLine());
@@ -67,7 +67,7 @@ namespace VeloMaxBDD
                             break;
                         case 2:
                             Console.WriteLine("Saisissez le N° de pièce à supprimer" );
-                            int numsupp = Convert.ToInt32(Console.ReadLine());
+                            string numsupp = Convert.ToString(Console.ReadLine());
                             Connection.update("delete from Piece where no_piece=" + numsupp + ";");
                             Console.WriteLine("Pièce supprimée");
                             break;
@@ -97,10 +97,28 @@ namespace VeloMaxBDD
                     switch (caseSwitch3)
                     {
                         case 1:
-                            Console.WriteLine("yes");
+                            Console.WriteLine("Saisissez un numero de modèle (3 chiffres)");
+                            string No = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un nom de modèle");
+                            string nom = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une grandeur");
+                            string grandeur = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un prix");
+                            int prix = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Saisissez une ligne");
+                            string ligne = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une date d'introduction (JJ/MM/AAAA)");
+                            string date_intro = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une date de discontinuiation (JJ/MM/AAAA)");
+                            string date_disco = Convert.ToString(Console.ReadLine());
+                            Modele m1 = new Modele(No, nom, grandeur, prix, ligne,date_intro,date_disco);
+                            m1.CreateModele();
                             break;
                         case 2:
-                            Console.WriteLine("ok");
+                            Console.WriteLine("Saisissez le N° du modele à supprimer (3 chiffres)");
+                            string numsupp = Convert.ToString(Console.ReadLine());
+                            Connection.update("delete from Modele where no_modele=" + numsupp + ";");
+                            Console.WriteLine("Modèle supprimé");
                             break;
                         case 3:
                             Console.WriteLine("no");
@@ -114,13 +132,49 @@ namespace VeloMaxBDD
                     switch (caseSwitch4)
                     {
                         case 1:
-                            Console.WriteLine("yes");
+                            Console.WriteLine("Saisissez un numero de client particulier (2 chiffres)");
+                            string No = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un nom ");
+                            string nom = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un prenom");
+                            string prenom = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une adresse (numéro,rue,ville)");
+                            string adresse = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un telephone");
+                            string tel = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un mail");
+                            string date_intro = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une date de souscription (JJ/MM/AAAA)");
+                            string date_souscription = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saissez un numéro de programme Fidélio");
+                            int prog = Convert.ToInt32(Console.ReadLine());
+                            Particulier part1 = new Particulier(No, nom, prenom, adresse, tel, date_intro, date_souscription,prog);
+                            part1.CreateParticulier();
                             break;
                         case 2:
-                            Console.WriteLine("ok");
+                            Console.WriteLine("Saisissez un numero de client particulier (2 chiffres)");
+                            string No2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un nom ");
+                            string nom2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un prenom");
+                            string prenom2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une adresse (numéro,rue,ville)");
+                            string adresse2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un téléphone");
+                            string tel2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un mail");
+                            string date_intro2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une date de souscription (JJ/MM/AAAA)");
+                            string date_souscription2 = Convert.ToString(Console.ReadLine());
+                            
+                            Particulier part2 = new Particulier(No2, nom2, prenom2, adresse2, tel2, date_intro2, date_souscription2, 0);
+                            part2.CreateParticulier();
                             break;
                         case 3:
-                            Console.WriteLine("no");
+                            Console.WriteLine("Saisissez le N° de client particulier à supprimer (2 chiffres)");
+                            string numsupp = Convert.ToString(Console.ReadLine());
+                            Connection.update("delete from Particulier where no_particulier=" + numsupp + ";");
+                            Console.WriteLine("Client particulier supprimé");
                             break;
                         case 4:
                             Console.WriteLine("no");
@@ -134,13 +188,47 @@ namespace VeloMaxBDD
                     switch (caseSwitch5)
                     {
                         case 1:
-                            Console.WriteLine("yes");
+                            Console.WriteLine("Saisissez un numero de client boutique (5 chiffres)");
+                            string No = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un nom ");
+                            string nom = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une adresse (numéro,rue,Ville");
+                            string adresse = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un téléphone");
+                            string tel = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un mail");
+                            string mail = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un contact");
+                            string contact = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une remise");
+                            int remise = Convert.ToInt32(Console.ReadLine());
+                            
+                            Boutique b1 = new Boutique(No, nom, adresse, tel, mail, contact, remise);
+                            b1.CreateBoutique();
                             break;
                         case 2:
-                            Console.WriteLine("ok");
+                            Console.WriteLine("Saisissez un numero de client boutique (5 chiffres)");
+                            string No2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un nom ");
+                            string nom2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une adresse (numéro,rue,Ville)");
+                            string adresse2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un téléphone");
+                            string tel2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un mail");
+                            string mail2 = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un contact");
+                            string contact2 = Convert.ToString(Console.ReadLine());
+                           
+
+                            Boutique b2 = new Boutique(No2, nom2, adresse2, tel2, mail2, contact2,0);
+                            b2.CreateBoutique();
                             break;
                         case 3:
-                            Console.WriteLine("no");
+                            Console.WriteLine("Saisissez le nom du client boutique à supprimer");
+                            string numsupp = Convert.ToString(Console.ReadLine());
+                            Connection.update("delete from Boutique where nom_boutique=" + numsupp + ";");
+                            Console.WriteLine("Client boutique supprimé");
                             break;
                         case 4:
                             Console.WriteLine("no");
@@ -154,10 +242,25 @@ namespace VeloMaxBDD
                     switch (caseSwitch6)
                     {
                         case 1:
-                            Console.WriteLine("yes");
+                            Console.WriteLine("Saisissez un siret de fournisseur (14 chiffres)");
+                            string No = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un nom de fournisseur ");
+                            string nom = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez un contact" );
+                            string contact = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une adresse (numéro,rue,ville)");
+                            string adresse = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une note (1,2,3,4)");
+                            int note = Convert.ToInt32(Console.ReadLine());
+                            
+                            Fournisseur f1 = new Fournisseur(No, nom, contact, adresse, note);
+                            f1.CreateFournisseur();
                             break;
                         case 2:
-                            Console.WriteLine("ok");
+                            Console.WriteLine("Saisissez le nom du fournisseur à supprimer");
+                            string numsupp = Convert.ToString(Console.ReadLine());
+                            Connection.update("delete from Fournisseur where nom_fournisseur=" + numsupp + ";");
+                            Console.WriteLine("Fournisseur supprimé");
                             break;
                         case 3:
                             Console.WriteLine("no");
@@ -167,22 +270,33 @@ namespace VeloMaxBDD
                     break;
                 case 6:
                     Console.WriteLine("Que souhaitez vous faire ?");
-                    Console.WriteLine("1. Création d'une commande \n2. Suppression d'une commande \n4. MAJ d'une commande");
+                    Console.WriteLine("1. Création d'une commande \n2. Suppression d'une commande \n3. MAJ d'une commande");
                     int caseSwitch7 = Convert.ToInt32(Console.ReadLine());
                     switch (caseSwitch7)
                     {
                         case 1:
-                            Console.WriteLine("yes");
+                            Console.WriteLine("Saisissez un numéro de commande (5 chiffres)");
+                            string No = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une date de commande (JJ/MM/AAAA) ");
+                            string nom = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une adresse de livraison (numéro,rue,ville)");
+                            string ad_livraison = Convert.ToString(Console.ReadLine());
+                            Console.WriteLine("Saisissez une date de livraison (JJ/MM/AAAA)");
+                            string date_livr = Convert.ToString(Console.ReadLine());
+
+                            Commande c1 = new Commande(No, nom, ad_livraison, date_livr);
+                            c1.CreateCommande();
                             break;
                         case 2:
-                            Console.WriteLine("ok");
+                            Console.WriteLine("Saisissez le numéro de la commande à supprimer (5 chiffres)");
+                            string numsupp = Convert.ToString(Console.ReadLine());
+                            Connection.update("delete from Commande where no_commande=" + numsupp + ";");
+                            Console.WriteLine("Commande supprimée");
                             break;
                         case 3:
                             Console.WriteLine("no");
                             break;
-                        case 4:
-                            Console.WriteLine("no");
-                            break;
+                        
                     }
                     break;
                     
