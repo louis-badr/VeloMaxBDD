@@ -12,6 +12,7 @@ namespace VeloMaxBDD
         static void Main(string[] args)
         {
 
+
             Console.WriteLine("Hello World");
 
             MySqlConnection connexion = null;
@@ -33,6 +34,8 @@ namespace VeloMaxBDD
             //exo(connexion);
             connexion.Close();
             Console.ReadKey();
+
+
         }
 
         static void Choix_interface()
