@@ -13,7 +13,7 @@ namespace VeloMaxBDD
         {
 
 
-            Console.WriteLine("Hello World");
+            
 
             MySqlConnection connexion = null;
             try
@@ -68,15 +68,23 @@ namespace VeloMaxBDD
                         case 2:
                             Console.WriteLine("Saisissez le N° de pièce à supprimer" );
                             int numsupp = Convert.ToInt32(Console.ReadLine());
-                            //Connection.SQLcomm("delete from Piece where no_piece=" + numsupp + ";");
+                            //Connection.update("delete from Piece where no_piece=" + numsupp + ";");
                             Console.WriteLine("Pièce supprimée");
                             break;
                         case 3:
+                            Console.WriteLine("Voici toutes les pièces :");
+                            //Connection.select("select * from Piece);
+                            Console.WriteLine();
                             Console.WriteLine("Quelle pièce voulez vous modifier ?");
+
                             Console.WriteLine("Que voulez vous modifier ?");
                             Console.WriteLine("1. N° Piece \n2. Description \n3. Date introduction \n4. Date introduction \n5. Date discontinuation \n6. Stock" );
-                            //int numsupp = Convert.ToInt32(Console.ReadLine());
-                            //Connection.SQLcomm("delete from Piece where no_piece=" + numsupp + ";");
+                            int numupdate = Convert.ToInt32(Console.ReadLine());
+                            if (numupdate == 1)
+                            {
+
+                            }
+                            //Connection.update("delete from Piece where no_piece=" + numsupp + ";");
                             Console.WriteLine("Pièce supprimée");
                             Console.WriteLine("no");
                             break;
