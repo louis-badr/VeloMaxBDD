@@ -53,7 +53,7 @@ namespace VeloMaxBDD
                     {
                         case 1:
                             Console.WriteLine("Saisissez un numero de pièce");
-                            int No = Convert.ToInt32(Console.ReadLine());
+                            string No = Convert.ToString(Console.ReadLine());
                             Console.WriteLine("Saisissez une description");
                             string desc = Convert.ToString(Console.ReadLine());
                             Console.WriteLine("Saisissez une date d'introduction");
