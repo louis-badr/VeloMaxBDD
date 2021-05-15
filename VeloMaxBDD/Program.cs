@@ -68,12 +68,12 @@ namespace VeloMaxBDD
                         case 2:
                             Console.WriteLine("Saisissez le N° de pièce à supprimer" );
                             int numsupp = Convert.ToInt32(Console.ReadLine());
-                            //Connection.update("delete from Piece where no_piece=" + numsupp + ";");
+                            Connection.update("delete from Piece where no_piece=" + numsupp + ";");
                             Console.WriteLine("Pièce supprimée");
                             break;
                         case 3:
                             Console.WriteLine("Voici toutes les pièces :");
-                            //Connection.select("select * from Piece);
+                            Connection.select("select * from Piece");
                             Console.WriteLine();
                             Console.WriteLine("Quelle pièce voulez vous modifier ?");
 
@@ -84,7 +84,7 @@ namespace VeloMaxBDD
                             {
 
                             }
-                            //Connection.update("delete from Piece where no_piece=" + numsupp + ";");
+                            Connection.update("delete from Piece where no_piece=" + numupdate + ";");
                             Console.WriteLine("Pièce supprimée");
                             Console.WriteLine("no");
                             break;

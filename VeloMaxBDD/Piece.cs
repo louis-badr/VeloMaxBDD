@@ -11,13 +11,13 @@ namespace VeloMaxBDD
     class Piece
     {
         // Attributs d'instance
-        int no_piece;
+        string no_piece;
         string desc_piece;
         string date_intro_piece;
         string date_disco_piece;
         int stock;
 
-        public Piece(int no_piece, string desc_piece, string date_intro_piece, string date_disco_piece, int stock)
+        public Piece(string no_piece, string desc_piece, string date_intro_piece, string date_disco_piece, int stock)
         {
             this.no_piece = no_piece;
             this.desc_piece = desc_piece;
@@ -25,7 +25,7 @@ namespace VeloMaxBDD
             this.date_disco_piece = date_disco_piece;
             this.stock = stock;
         }
-        public int No_piece
+        public string No_piece
         {
             get { return no_piece; }
             set

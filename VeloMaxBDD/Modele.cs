@@ -9,7 +9,7 @@ namespace VeloMaxBDD
 {
     class Modele
     {
-        int no_modele;
+        string no_modele;
         string nom_modele;
         string grandeur;
         int prix_modele;
@@ -17,7 +17,7 @@ namespace VeloMaxBDD
         string date_intro_modele;
         string date_disco_modele;
 
-        public Modele(int no_modele, string nom_modele, string grandeur, int prix_modele, string ligne, string date_intro_modele, string date_disco_modele)
+        public Modele(string no_modele, string nom_modele, string grandeur, int prix_modele, string ligne, string date_intro_modele, string date_disco_modele)
         {
             this.no_modele = no_modele;
             this.nom_modele = nom_modele;
@@ -27,7 +27,7 @@ namespace VeloMaxBDD
             this.date_intro_modele = date_intro_modele;
             this.date_disco_modele = date_disco_modele;
         }
-        public int No_modele
+        public string No_modele
         {
             get { return no_modele; }
             set
