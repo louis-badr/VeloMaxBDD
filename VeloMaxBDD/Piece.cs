@@ -73,6 +73,7 @@ namespace VeloMaxBDD
         
         public void CreatePiece()
         {
+            
             //Connection.SQLcomm($"insert into Piece values ('{no_piece}','{desc_piece}',{date_intro_piece}',{date_disco_piece}','{stock}');");
             Console.WriteLine("Voici la pièce créée : \n");
             //Connection.SQLcomm("select * from Piece where no_piece="+ no_piece+ ";");
