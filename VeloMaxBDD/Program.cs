@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace VeloMaxBDD
     {
         static void Main(string[] args)
         {
+
             MySqlConnection connexion = null;
             try
             {
@@ -48,10 +50,15 @@ namespace VeloMaxBDD
             reader.Close();
             command1.Dispose();
 
-            //foreach(Fournisseur fournisseur in listeFournisseurs)
-            //{
-            //    Console.WriteLine(fournisseur.Siret_fournisseur+ " | " + fournisseur.Nom_fournisseur+ " | " + fournisseur.Contact_fournisseur+ " | " + fournisseur.Adresse_fournisseur+ " | " + fournisseur.Note_fournisseur);
-            //}
+            // affichage de la liste des fournisseurs
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Siret | Nom | Contact | Adresse | Note");
+            Console.WriteLine("--------------------------------------");
+            foreach (Fournisseur f in listeFournisseurs)
+            {
+                Console.WriteLine(f.ToString());
+            }
+            Console.WriteLine();
 
             // lecture de la table pièce
             List<Piece> listePieces = new List<Piece>();
@@ -70,10 +77,15 @@ namespace VeloMaxBDD
             reader.Close();
             command2.Dispose();
 
-            //foreach (Piece piece in listePieces)
-            //{
-            //    Console.WriteLine(piece.No_piece + " | " + piece.Desc_piece + " | " + piece.Date_intro_piece + " | " + piece.Date_disco_piece + " | " + piece.Stock);
-            //}
+            // affichage de la liste des pièces
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("N° de pièce | Description | Date d'introduction | Date de discontinuité | Nombre de pièces en stock");
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
+            foreach (Piece p in listePieces)
+            {
+                Console.WriteLine(p.ToString());
+            }
+            Console.WriteLine();
 
             // lecture de la table boutique
             List<Boutique> listeBoutiques = new List<Boutique>();
@@ -92,10 +104,15 @@ namespace VeloMaxBDD
             reader.Close();
             command3.Dispose();
 
-            //foreach (Boutique boutique in listeBoutiques)
-            //{
-            //    Console.WriteLine(boutique.No_boutique + " | " + boutique.Nom_boutique + " | " + boutique.Adresse_boutique + " | " + boutique.Tel_boutique + " | " + boutique.Mail_boutique + " | " + boutique.Contact_boutique + " | " + boutique.Remise_boutique);
-            //}
+            // affichage de la liste des boutiques
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("N° de boutique | Nom de la boutique | Adresse | Numéro de téléphone | Adresse e-mail | Contact | Remise");
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------");
+            foreach (Boutique b in listeBoutiques)
+            {
+                Console.WriteLine(b.ToString());
+            }
+            Console.WriteLine();
 
             // lecture de la table commande
             List<Commande> listeCommandes = new List<Commande>();
@@ -114,10 +131,15 @@ namespace VeloMaxBDD
             reader.Close();
             command4.Dispose();
 
-            //foreach (Commande commande in listeCommandes)
-            //{
-            //    Console.WriteLine(commande.No_commande + " | " + commande.Date_commande + " | " + commande.Adresse_livraison + " | " + commande.Date_livraison);
-            //}
+            // affichage de la liste des commandes
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("N° de commande | Date de la commande | Adresse de livraison | Date de livraison");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            foreach (Commande c in listeCommandes)
+            {
+                Console.WriteLine(c.ToString());
+            }
+            Console.WriteLine();
 
             // lecture de la table modele
             List<Modele> listeModeles = new List<Modele>();
@@ -136,10 +158,15 @@ namespace VeloMaxBDD
             reader.Close();
             command5.Dispose();
 
-            //foreach (Modele modele in listeModeles)
-            //{
-            //    Console.WriteLine(modele.No_modele + " | " + modele.Nom_modele + " | " + modele.Grandeur + " | " + modele.Prix_modele + " | " + modele.Ligne + " | " + modele.Date_intro_modele + " | " + modele.Date_disco_modele);
-            //}
+            // affichage de la liste des modèles
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            Console.WriteLine("N° de modèle | Nom du modèle | Grandeur | Prix | Ligne | Date d'introduction | Date de discontinuité");
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            foreach (Modele m in listeModeles)
+            {
+                Console.WriteLine(m.ToString());
+            }
+            Console.WriteLine();
 
             // lecture de la table particulier
             List<Particulier> listeParticuliers = new List<Particulier>();
@@ -158,12 +185,16 @@ namespace VeloMaxBDD
             reader.Close();
             command6.Dispose();
 
-            //foreach (Particulier particulier in listeParticuliers)
-            //{
-            //    Console.WriteLine(particulier.No_particulier + " | " + particulier.Nom_particulier + " | " + particulier.Prenom_particulier + " | " + particulier.Adresse_particulier + " | " + particulier.Tel_particulier + " | " + particulier.Mail_particulier + " | " + particulier.Date_souscription + " | " + particulier.No_programme);
-            //}
+            // affichage de la liste des particuliers
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("N° de particulier | Nom | Prénom | Adresse | Numéro de téléphone | Date de souscription | N° de programme");
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+            foreach (Particulier p in listeParticuliers)
+            {
+                Console.WriteLine(p.ToString());
+            }
+            Console.WriteLine();
 
-            Console.WriteLine(listeParticuliers[0].ToString());
             Choix_interface();
             //exo(connexion);
             connexion.Close();
@@ -438,5 +469,6 @@ namespace VeloMaxBDD
             
             Console.ReadKey();
         }
+
     }
 }
