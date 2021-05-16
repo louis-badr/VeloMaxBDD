@@ -97,6 +97,10 @@ namespace VeloMaxBDD
                 date_disco_modele = value;
             }
         }
+        public override string ToString()
+        {
+            return no_modele + " | " + nom_modele + " | " + grandeur + " | " + prix_modele + " | " + ligne + " | " + date_intro_modele + " | " + date_disco_modele;
+        }
         public void CreateModele()
         {
 

@@ -74,6 +74,10 @@ namespace VeloMaxBDD
             }
 
         }
+        public override string ToString()
+        {
+            return siret_fournisseur + " | " + nom_fournisseur + " | " + contact_fournisseur + " | " + adresse_fournisseur + " | " + note_fournisseur;
+        }
         public void CreateFournisseur()
         {
 

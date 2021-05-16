@@ -63,7 +63,10 @@ namespace VeloMaxBDD
             }
 
         }
-
+        public override string ToString()
+        {
+            return no_commande + " | " + date_commande + " | " + adresse_livraison + " | " + date_livraison;
+        }
         public void CreateCommande()
         {
 

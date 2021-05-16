@@ -8,7 +8,7 @@ namespace VeloMaxBDD
 {
     class Particulier
     {
-        string no_particulier;
+        int no_particulier;
         string nom_particulier;
         string prenom_particulier;
         string adresse_particulier;
@@ -17,7 +17,7 @@ namespace VeloMaxBDD
         string date_souscription;
         int no_programme;
 
-        public Particulier(string no_particulier, string nom_particulier, string prenom_particulier, string adresse_particulier, string tel_particulier, string mail_particulier,string date_souscription, int no_programme)
+        public Particulier(int no_particulier, string nom_particulier, string prenom_particulier, string adresse_particulier, string tel_particulier, string mail_particulier,string date_souscription, int no_programme)
         {
             this.no_particulier = no_particulier;
             this.nom_particulier = nom_particulier;
@@ -29,7 +29,7 @@ namespace VeloMaxBDD
             this.no_programme = no_programme;
 
         }
-        public string No_particulier
+        public int No_particulier
         {
             get { return no_particulier; }
             set
@@ -116,6 +116,10 @@ namespace VeloMaxBDD
                 no_programme = value;
             }
 
+        }
+        public override string ToString()
+        {
+            return no_particulier + " | " + nom_particulier + " | " + prenom_particulier + " | " + adresse_particulier + " | " + tel_particulier + " | " + mail_particulier + " | " + date_souscription + " | " + no_programme;
         }
         public void CreateParticulier()
         {

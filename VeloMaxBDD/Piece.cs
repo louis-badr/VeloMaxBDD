@@ -71,11 +71,14 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update piece stock= '{value}' where no_piece= '{no_piece}';");
+                Connection.update($"update piece set stock= '{value}' where no_piece= '{no_piece}';");
                 stock = value;
             }
         }
-        
+        public override string ToString()
+        {
+            return no_piece + " | " + desc_piece + " | " + date_intro_piece + " | " + date_disco_piece + " | " + stock;
+        }
         public void CreatePiece()
         {
             
