@@ -78,5 +78,10 @@ namespace VeloMaxBDD
             Console.WriteLine("Voici la pièce créée : \n");
             Connection.select("select * from Piece where no_piece="+ no_piece+ ";");
         }
+
+        public override string ToString()
+        {
+            return no_piece + " | " + desc_piece + " | " + date_intro_piece + " | " + date_disco_piece + " | " + stock;
+        }
     }
 }
