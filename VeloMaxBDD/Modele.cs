@@ -97,5 +97,9 @@ namespace VeloMaxBDD
             Console.WriteLine("Voici le modele créé : \n");
             Connection.select("select * from Modele where no_modele=" + no_modele + ";");
         }
+        public override string ToString()
+        {
+            return no_modele + " | " + nom_modele + " | " + grandeur + " | " + prix_modele + " | " + ligne + " | " + date_intro_modele + " | " + date_disco_modele;
+        }
     }
 }

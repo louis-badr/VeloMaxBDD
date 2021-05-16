@@ -163,7 +163,7 @@ namespace VeloMaxBDD
             //    Console.WriteLine(particulier.No_particulier + " | " + particulier.Nom_particulier + " | " + particulier.Prenom_particulier + " | " + particulier.Adresse_particulier + " | " + particulier.Tel_particulier + " | " + particulier.Mail_particulier + " | " + particulier.Date_souscription + " | " + particulier.No_programme);
             //}
 
-            Console.WriteLine(listePieces[0].ToString());
+            Console.WriteLine(listeParticuliers[0].ToString());
             Choix_interface();
             //exo(connexion);
             connexion.Close();

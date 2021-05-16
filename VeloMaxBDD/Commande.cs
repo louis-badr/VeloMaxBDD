@@ -75,5 +75,10 @@ namespace VeloMaxBDD
             Console.WriteLine("Voici la commande créée : \n");
             Connection.select("select * from Commande where no_commande=" + no_commande + ";");
         }
+
+        public override string ToString()
+        {
+            return no_commande + " | " + date_commande + " | " + adresse_livraison + " | " + date_livraison;
+        }
     }
 }

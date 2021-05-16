@@ -124,5 +124,9 @@ namespace VeloMaxBDD
             Console.WriteLine("Voici le particulier créé : \n");
             Connection.select("select * from Particulier where no_particulier=" + no_particulier + ";");
         }
+        public override string ToString()
+        {
+            return no_particulier + " | " + nom_particulier + " | " + prenom_particulier + " | " + adresse_particulier + " | " + tel_particulier + " | " + mail_particulier + " | " + date_souscription + " | " + no_programme;
+        }
     }
 }

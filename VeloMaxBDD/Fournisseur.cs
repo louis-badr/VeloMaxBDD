@@ -84,5 +84,9 @@ namespace VeloMaxBDD
             Console.WriteLine("Voici le fournisseur créé : \n");
             Connection.select("select * from Fournisseur where nom_fournisseur=" + nom_fournisseur + ";");
         }
+        public override string ToString()
+        {
+            return siret_fournisseur + " | " + nom_fournisseur + " | " + contact_fournisseur + " | " + adresse_fournisseur + " | " + note_fournisseur;
+        }
     }
 }
