@@ -14,7 +14,7 @@ namespace VeloMaxBDD
             {
                 string connexionString = "SERVER=localhost;PORT=3306;" +
                                          "DATABASE=veloMax;" +
-                                         "UID=root;PASSWORD=Valou1234";
+                                         "UID=bozo;PASSWORD=bozo";
 
                 connexion = new MySqlConnection(connexionString);
                 connexion.Open();
@@ -226,6 +226,7 @@ namespace VeloMaxBDD
                                 foreach (Piece piece in listePieces)
                                 {
                                     Console.WriteLine(piece.ToString());
+                                    Console.WriteLine();
                                 }
                                 Console.WriteLine("Entrez le N° de pièce que vous voulez modifier :");
                                 string nummodif = Convert.ToString(Console.ReadLine());
@@ -319,9 +320,9 @@ namespace VeloMaxBDD
                                 break;
                             case 2:
                                 Console.WriteLine("Saisissez le N° du modele à supprimer (3 chiffres)");
-                                string numsupp = Convert.ToString(Console.ReadLine());
-                                Connection.update($"delete from Modele where no_modele=  '{numsupp}'  ;");
-                                listeModeles.Remove(listeModeles.Find(x => x.No_modele == numsupp));
+                                string numsupp2 = Convert.ToString(Console.ReadLine());
+                                Connection.update($"delete from Modele where no_modele=  '{numsupp2}'  ;");
+                                listeModeles.Remove(listeModeles.Find(x => x.No_modele == numsupp2));
                                 Console.WriteLine("Modèle supprimé");
                                 Console.WriteLine();
 
@@ -329,75 +330,80 @@ namespace VeloMaxBDD
                                 Console.WriteLine();
                                 break;
                             case 3:
+                                foreach (Modele modele in listeModeles)
+                                {
+                                    Console.WriteLine(modele.ToString());
+                                    Console.WriteLine();
+                                }
                                 Console.WriteLine("Entrez le N° du modèle que vous voulez modifier :");
-                                string nummodif = Convert.ToString(Console.ReadLine());
+                                string nummodif2 = Convert.ToString(Console.ReadLine());
                                 Console.WriteLine("Que voulez vous modifier ?");
                                 Console.WriteLine("1. N° modele \n2. Nom modèle \n3. Grandeur \n4. Prix \n5. Ligne \n6. Date d'introduction \n7. Date de discontinuité");
-                                int key = Convert.ToInt32(Console.ReadLine());
-                                if (key == 1)
+                                int key2 = Convert.ToInt32(Console.ReadLine());
+                                if (key2 == 1)
                                 {
                                     Console.WriteLine("Entrez le nouveau N° de modèle (3 chiffres)");
                                     string numpiece = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Modele set no_modele= '{numpiece}' where no_modele= '{nummodif}';");
-                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif);
+                                    Connection.update($"update Modele set no_modele= '{numpiece}' where no_modele= '{nummodif2}';");
+                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif2);
                                     listeModeles[index].No_modele = numpiece;
                                     Console.WriteLine("Modèle modifié");
 
                                 }
-                                if (key == 2)
+                                if (key2 == 2)
                                 {
                                     Console.WriteLine("Entrez le nouveau nom modèle");
                                     string descpiece = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Modele set nom_modele= '{descpiece}' where no_modele= '{nummodif}';");
-                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif);
+                                    Connection.update($"update Modele set nom_modele= '{descpiece}' where no_modele= '{nummodif2}';");
+                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif2);
                                     listeModeles[index].Nom_modele = descpiece;
                                     Console.WriteLine("Modèle modifié");
                                 }
-                                if (key == 3)
+                                if (key2 == 3)
                                 {
                                     Console.WriteLine("Entrez la nouvelle grandeur");
                                     string grandeurupdate = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Modele set grandeur= '{grandeurupdate}' where no_modele= '{nummodif}';");
-                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif);
+                                    Connection.update($"update Modele set grandeur= '{grandeurupdate}' where no_modele= '{nummodif2}';");
+                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif2);
                                     listeModeles[index].Grandeur = grandeurupdate;
                                     Console.WriteLine("Modèle modifié");
                                 }
-                                if (key == 4)
+                                if (key2 == 4)
                                 {
                                     Console.WriteLine("Entrez le nouveau prix");
                                     int prixup = Convert.ToInt32(Console.ReadLine());
-                                    Connection.update($"update Modèle set prix_modele= '{prixup}' where no_modele= '{nummodif}';");
-                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif);
+                                    Connection.update($"update Modèle set prix_modele= '{prixup}' where no_modele= '{nummodif2}';");
+                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif2);
                                     listeModeles[index].Prix_modele = prixup;
                                     Console.WriteLine("Modèle modifié");
                                 }
-                                if (key == 5)
+                                if (key2 == 5)
                                 {
 
                                     Console.WriteLine("Entrez la nouvelle ligne");
                                     string ligneup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Modele set ligne= '{ligneup}' where no_modele= '{nummodif}';");
-                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif);
+                                    Connection.update($"update Modele set ligne= '{ligneup}' where no_modele= '{nummodif2}';");
+                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif2);
                                     listeModeles[index].Ligne = ligneup;
                                     Console.WriteLine("Modèle modifié");
                                 }
-                                if (key == 6)
+                                if (key2 == 6)
                                 {
 
                                     Console.WriteLine("Entrez la nouvelle date d'introduction (JJ/MM/AAAA)");
                                     string dateintroup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Modele set date_intro_modele= '{dateintroup}' where no_modele= '{nummodif}';");
-                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif);
+                                    Connection.update($"update Modele set date_intro_modele= '{dateintroup}' where no_modele= '{nummodif2}';");
+                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif2);
                                     listeModeles[index].Date_intro_modele = dateintroup;
                                     Console.WriteLine("Modèle modifié");
                                 }
-                                if (key == 7)
+                                if (key2 == 7)
                                 {
 
                                     Console.WriteLine("Entrez la nouvelle date de discontinuité (JJ/MM/AAAA)");
                                     string datediscoup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Modele set date_disco_modele= '{datediscoup}' where no_modele= '{nummodif}';");
-                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif);
+                                    Connection.update($"update Modele set date_disco_modele= '{datediscoup}' where no_modele= '{nummodif2}';");
+                                    int index = listeModeles.FindIndex(x => x.No_modele == nummodif2);
                                     listeModeles[index].Date_disco_modele = datediscoup;
                                     Console.WriteLine("Modèle modifié");
                                 }
@@ -442,9 +448,9 @@ namespace VeloMaxBDD
                                 break;
                             case 2:
                                 Console.WriteLine("Saisissez un numero de client particulier (chiffres)");
-                                int No2 = Convert.ToInt32(Console.ReadLine());
+                                int No3 = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Saisissez un nom ");
-                                string nom2 = Convert.ToString(Console.ReadLine());
+                                string nom3 = Convert.ToString(Console.ReadLine());
                                 Console.WriteLine("Saisissez un prenom");
                                 string prenom2 = Convert.ToString(Console.ReadLine());
                                 Console.WriteLine("Saisissez une adresse (numéro,rue,ville)");
@@ -456,7 +462,7 @@ namespace VeloMaxBDD
                                 Console.WriteLine("Saisissez une date de souscription (JJ/MM/AAAA)");
                                 string date_souscription2 = Convert.ToString(Console.ReadLine());
 
-                                Particulier part2 = new Particulier(No2, nom2, prenom2, adresse2, tel2, date_intro2, date_souscription2, 0);
+                                Particulier part2 = new Particulier(No3, nom3, prenom2, adresse2, tel2, date_intro2, date_souscription2, 0);
                                 part2.CreateParticulier();
                                 listeParticuliers.Add(part2);
                                 Console.WriteLine();
@@ -466,9 +472,9 @@ namespace VeloMaxBDD
                                 break;
                             case 3:
                                 Console.WriteLine("Saisissez le N° de client particulier à supprimer (chiffres)");
-                                int numsupp = Convert.ToInt32(Console.ReadLine());
-                                Connection.update($"delete from Particulier where no_particulier= '{numsupp}'  ;");
-                                listeParticuliers.Remove(listeParticuliers.Find(x => x.No_particulier == numsupp));
+                                int numsupp2 = Convert.ToInt32(Console.ReadLine());
+                                Connection.update($"delete from Particulier where no_particulier= '{numsupp2}'  ;");
+                                listeParticuliers.Remove(listeParticuliers.Find(x => x.No_particulier == numsupp2));
                                 Console.WriteLine("Client particulier supprimé");
                                 Console.WriteLine();
 
@@ -476,89 +482,94 @@ namespace VeloMaxBDD
                                 Console.WriteLine();
                                 break;
                             case 4:
+                                foreach (Particulier particulier in listeParticuliers)
+                                {
+                                    Console.WriteLine(particulier.ToString());
+                                    Console.WriteLine();
+                                }
                                 Console.WriteLine("Entrez le N° de client particulier que vous voulez modifier (chiffres) :");
-                                int nummodif = Convert.ToInt32(Console.ReadLine());
+                                int nummodif2 = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine("Que voulez vous modifier ?");
                                 Console.WriteLine("1. N° client \n2. Nom client \n3. Prenom client \n4. Adresse client \n5. Tel client \n6. Mail client \n7. Date souscription \n8. N° programme");
-                                int key = Convert.ToInt32(Console.ReadLine());
-                                if (key == 1)
+                                int key2 = Convert.ToInt32(Console.ReadLine());
+                                if (key2 == 1)
                                 {
                                     Console.WriteLine("Entrez le nouveau N° de client (chiffres)");
                                     int numpiece = Convert.ToInt32(Console.ReadLine());
-                                    Connection.update($"update Particulier set no_particulier= '{numpiece}' where no_particulier= '{nummodif}';");
-                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif);
+                                    Connection.update($"update Particulier set no_particulier= '{numpiece}' where no_particulier= '{nummodif2}';");
+                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif2);
                                     listeParticuliers[index].No_particulier = numpiece;
                                     Console.WriteLine("Client modifié");
                                     Console.WriteLine(listeParticuliers[index].ToString());
                                 }
-                                if (key == 2)
+                                if (key2 == 2)
                                 {
                                     Console.WriteLine("Entrez le nouveau nom du client");
                                     string nomup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Particulier set nom_particulier= '{nomup}' where no_particulier= '{nummodif}';");
-                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif);
+                                    Connection.update($"update Particulier set nom_particulier= '{nomup}' where no_particulier= '{nummodif2}';");
+                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif2);
                                     listeParticuliers[index].Nom_particulier = nomup;
                                     Console.WriteLine("Client modifié");
                                     Console.WriteLine(listeParticuliers[index].ToString());
                                 }
-                                if (key == 3)
+                                if (key2 == 3)
                                 {
                                     Console.WriteLine("Entrez le nouveau prénom du client");
                                     string prenomup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Particulier set prenom_particulier= '{prenomup}' where no_particulier= '{nummodif}';");
-                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif);
+                                    Connection.update($"update Particulier set prenom_particulier= '{prenomup}' where no_particulier= '{nummodif2}';");
+                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif2);
                                     listeParticuliers[index].Prenom_particulier = prenomup;
                                     Console.WriteLine("Client modifié");
                                 }
-                                if (key == 4)
+                                if (key2 == 4)
                                 {
                                     Console.WriteLine("Entrez la nouvelle adresse du client (numéro,rue,ville)");
                                     string adresseup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Particulier set adresse_particulier= '{adresseup}' where no_particulier= '{nummodif}';");
-                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif);
+                                    Connection.update($"update Particulier set adresse_particulier= '{adresseup}' where no_particulier= '{nummodif2}';");
+                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif2);
                                     listeParticuliers[index].Adresse_particulier = adresseup;
                                     Console.WriteLine("Client modifié");
                                 }
-                                if (key == 5)
+                                if (key2 == 5)
                                 {
 
                                     Console.WriteLine("Entrez le nouveau téléphone du client");
                                     string telup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Particulier set tel_particulier= '{telup}' where no_particulier= '{nummodif}';");
-                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif);
+                                    Connection.update($"update Particulier set tel_particulier= '{telup}' where no_particulier= '{nummodif2}';");
+                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif2);
                                     listeParticuliers[index].Tel_particulier = telup;
                                     Console.WriteLine(listeParticuliers[index].ToString());
                                     Console.WriteLine("Client modifié");
                                 }
-                                if (key == 6)
+                                if (key2 == 6)
                                 {
 
                                     Console.WriteLine("Entrez le nouveau mail du client");
                                     string mailup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Particulier set mail_particulier= '{mailup}' where no_particulier= '{nummodif}';");
-                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif);
+                                    Connection.update($"update Particulier set mail_particulier= '{mailup}' where no_particulier= '{nummodif2}';");
+                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif2);
                                     listeParticuliers[index].Mail_particulier = mailup;
                                     Console.WriteLine(listeParticuliers[index].ToString());
                                     Console.WriteLine("Client modifié");
                                 }
-                                if (key == 7)
+                                if (key2 == 7)
                                 {
 
                                     Console.WriteLine("Entrez la nouvelle date de souscription");
                                     string sousc = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Particulier set date_souscription= '{sousc}' where no_particulier= '{nummodif}';");
-                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif);
+                                    Connection.update($"update Particulier set date_souscription= '{sousc}' where no_particulier= '{nummodif2}';");
+                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif2);
                                     listeParticuliers[index].Date_souscription = sousc;
                                     Console.WriteLine(listeParticuliers[index].ToString());
                                     Console.WriteLine("Client modifié");
                                 }
-                                if (key == 8)
+                                if (key2 == 8)
                                 {
 
                                     Console.WriteLine("Entrez le nouveau N° de programme du client");
                                     int progup = Convert.ToInt32(Console.ReadLine());
-                                    Connection.update($"update Particulier set no_programme= '{progup}' where no_particulier= '{nummodif}';");
-                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif);
+                                    Connection.update($"update Particulier set no_programme= '{progup}' where no_particulier= '{nummodif2}';");
+                                    int index = listeParticuliers.FindIndex(x => x.No_particulier == nummodif2);
                                     listeParticuliers[index].No_programme = progup;
                                     Console.WriteLine(listeParticuliers[index].ToString());
                                     Console.WriteLine("Client modifié");
@@ -602,9 +613,9 @@ namespace VeloMaxBDD
                                 break;
                             case 2:
                                 Console.WriteLine("Saisissez un numero de client boutique (5 chiffres)");
-                                string No2 = Convert.ToString(Console.ReadLine());
+                                string No3 = Convert.ToString(Console.ReadLine());
                                 Console.WriteLine("Saisissez un nom ");
-                                string nom2 = Convert.ToString(Console.ReadLine());
+                                string nom3 = Convert.ToString(Console.ReadLine());
                                 Console.WriteLine("Saisissez une adresse (numéro,rue,Ville)");
                                 string adresse2 = Convert.ToString(Console.ReadLine());
                                 Console.WriteLine("Saisissez un téléphone");
@@ -615,7 +626,7 @@ namespace VeloMaxBDD
                                 string contact2 = Convert.ToString(Console.ReadLine());
 
 
-                                Boutique b2 = new Boutique(No2, nom2, adresse2, tel2, mail2, contact2, 0);
+                                Boutique b2 = new Boutique(No3, nom3, adresse2, tel2, mail2, contact2, 0);
                                 b2.CreateBoutique();
                                 listeBoutiques.Add(b2);
                                 Console.WriteLine();
@@ -625,9 +636,9 @@ namespace VeloMaxBDD
                                 break;
                             case 3:
                                 Console.WriteLine("Saisissez le nom du client boutique à supprimer");
-                                string numsupp = Convert.ToString(Console.ReadLine());
-                                Connection.update($"delete from Boutique where nom_boutique=  '{numsupp }' ;");
-                                listeBoutiques.Remove(listeBoutiques.Find(x => x.No_boutique == numsupp));
+                                string numsupp3 = Convert.ToString(Console.ReadLine());
+                                Connection.update($"delete from Boutique where nom_boutique=  '{numsupp3 }' ;");
+                                listeBoutiques.Remove(listeBoutiques.Find(x => x.No_boutique == numsupp3));
                                 Console.WriteLine("Client boutique supprimé");
                                 Console.WriteLine();
 
@@ -635,81 +646,86 @@ namespace VeloMaxBDD
                                 Console.WriteLine();
                                 break;
                             case 4:
+                                foreach (Boutique boutique in listeBoutiques)
+                                {
+                                    Console.WriteLine(boutique.ToString());
+                                    Console.WriteLine();
+                                }
                                 Console.WriteLine("Entrez le nom du client boutique que vous voulez modifier :");
-                                string nummodif = Convert.ToString(Console.ReadLine());
+                                string nummodif3 = Convert.ToString(Console.ReadLine());
                                 Console.WriteLine("Que voulez vous modifier ?");
                                 Console.WriteLine("1. N° boutique \n2. Nom boutique \n3. Adresse boutique \n4. Téléphone boutique \n5. Mail boutique \n6. Contact boutique \n7. Remise boutique");
-                                int key = Convert.ToInt32(Console.ReadLine());
-                                if (key == 1)
+                                int key3 = Convert.ToInt32(Console.ReadLine());
+                                if (key3 == 1)
                                 {
                                     Console.WriteLine("Entrez le nouveau N° boutique (5 chiffres)");
                                     string numpiece = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Boutique set no_boutique= '{numpiece}' where nom_boutique= '{nummodif}';");
-                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif);
+                                    Connection.update($"update Boutique set no_boutique= '{numpiece}' where nom_boutique= '{nummodif3}';");
+                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif3);
                                     Console.WriteLine(index);
                                     //listeBoutiques[index].No_boutique = numpiece;
                                     Console.WriteLine("Boutique modifiée");
                                     Console.WriteLine(listePieces[index].ToString());
                                 }
-                                if (key == 2)
+                                if (key3 == 2)
                                 {
                                     Console.WriteLine("Entrez le nouveau nom boutique");
                                     string nombup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Boutique set nom_boutique= '{nombup}' where nom_boutique= '{nummodif}';");
-                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif);
+                                    Connection.update($"update Boutique set nom_boutique= '{nombup}' where nom_boutique= '{nummodif3}';");
+                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif3);
                                     listeBoutiques[index].Nom_boutique = nombup;
                                     Console.WriteLine("Boutique modifiée");
                                     Console.WriteLine(listeBoutiques[index].ToString());
                                 }
-                                if (key == 3)
+                                if (key3 == 3)
                                 {
                                     Console.WriteLine("Entrez la nouvelle adresse boutique");
                                     string adressbeup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Boutique set adresse_boutique= '{adressbeup}' where nom_boutique= '{nummodif}';");
-                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif);
+                                    Connection.update($"update Boutique set adresse_boutique= '{adressbeup}' where nom_boutique= '{nummodif3}';");
+                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif3);
                                     listeBoutiques[index].Adresse_boutique = adressbeup;
                                     Console.WriteLine("Boutique modifiée");
                                     Console.WriteLine(listeBoutiques[index].ToString());
                                 }
-                                if (key == 4)
+                                if (key3 == 4)
                                 {
                                     Console.WriteLine("Entrez le nouveau téléphone boutique");
                                     string telbup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Boutique set tel_boutique= '{telbup}' where nom_boutique= '{nummodif}';");
-                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif);
+                                    Connection.update($"update Boutique set tel_boutique= '{telbup}' where nom_boutique= '{nummodif3}';");
+                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif3);
                                     listeBoutiques[index].Tel_boutique = telbup;
                                     Console.WriteLine("Boutique modifiée");
                                     Console.WriteLine(listeBoutiques[index].ToString());
                                 }
-                                if (key == 5)
+                                if (key3 == 5)
                                 {
 
                                     Console.WriteLine("Entrez le nouveau mail boutique");
                                     string mailup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Boutique set mail_boutique= '{mailup}' where nom_boutique= '{nummodif}';");
-                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif);
+                                    Connection.update($"update Boutique set mail_boutique= '{mailup}' where nom_boutique= '{nummodif3}';");
+                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif3);
                                     listeBoutiques[index].Mail_boutique = mailup;
                                     Console.WriteLine("Boutique modifiée");
                                     Console.WriteLine(listeBoutiques[index].ToString());
                                 }
-                                if (key == 6)
+                                if (key3 == 6)
                                 {
 
                                     Console.WriteLine("Entrez le nouveau contact boutique");
                                     string contactup = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Boutique set contact_boutique= '{contactup}' where nom_boutique= '{nummodif}';");
-                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif);
+                                    Connection.update($"update Boutique set contact_boutique= '{contactup}' where nom_boutique= '{nummodif3}';");
+                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif3);
                                     listeBoutiques[index].Contact_boutique = contactup;
                                     Console.WriteLine("Boutique modifiée");
                                     Console.WriteLine(listeBoutiques[index].ToString());
                                 }
-                                if (key == 7)
+                                if (key3 == 7)
                                 {
 
                                     Console.WriteLine("Entrez la nouvelle remise boutique");
                                     int remiseup = Convert.ToInt32(Console.ReadLine());
-                                    Connection.update($"update Boutique set remise_boutique= '{remiseup}' where nom_boutique= '{nummodif}';");
-                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif);
+                                    Connection.update($"update Boutique set remise_boutique= '{remiseup}' where nom_boutique= '{nummodif3}';");
+                                    int index = listeBoutiques.FindIndex(x => x.Nom_boutique == nummodif3);
                                     listeBoutiques[index].Remise_boutique = remiseup;
                                     Console.WriteLine("Boutique modifiée");
                                     Console.WriteLine(listeBoutiques[index].ToString());
@@ -749,9 +765,9 @@ namespace VeloMaxBDD
                                 break;
                             case 2:
                                 Console.WriteLine("Saisissez le nom du fournisseur à supprimer");
-                                string numsupp = Convert.ToString(Console.ReadLine());
-                                Connection.update($"delete from Fournisseur where nom_fournisseur= '{ numsupp}'  ;");
-                                listeFournisseurs.Remove(listeFournisseurs.Find(x => x.Nom_fournisseur == numsupp));
+                                string numsupp4 = Convert.ToString(Console.ReadLine());
+                                Connection.update($"delete from Fournisseur where nom_fournisseur= '{ numsupp4}'  ;");
+                                listeFournisseurs.Remove(listeFournisseurs.Find(x => x.Nom_fournisseur == numsupp4));
                                 Console.WriteLine("Fournisseur supprimé");
                                 Console.WriteLine();
 
@@ -759,58 +775,63 @@ namespace VeloMaxBDD
                                 Console.WriteLine();
                                 break;
                             case 3:
+                                foreach (Fournisseur fournisseur in listeFournisseurs)
+                                {
+                                    Console.WriteLine(fournisseur.ToString());
+                                    Console.WriteLine();
+                                }
                                 Console.WriteLine("Entrez le nom du fournisseur que vous voulez modifier :");
-                                string nummodif = Convert.ToString(Console.ReadLine());
+                                string nummodif4 = Convert.ToString(Console.ReadLine());
                                 Console.WriteLine("Que voulez vous modifier ?");
                                 Console.WriteLine("1. N° SIRET \n2. Nom fournisseur \n3. Contact fournisseur \n4. Adresse fournisseur \n5. Note fournisseur");
-                                int key = Convert.ToInt32(Console.ReadLine());
-                                if (key == 1)
+                                int key4 = Convert.ToInt32(Console.ReadLine());
+                                if (key4 == 1)
                                 {
                                     Console.WriteLine("Entrez le nouveau N° SIRET");
                                     string numpiece = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Fournisseur set siret_fournisseur= '{numpiece}' where nom_fournisseur= '{nummodif}';");
-                                    int index = listeFournisseurs.FindIndex(x => x.Nom_fournisseur == nummodif);
+                                    Connection.update($"update Fournisseur set siret_fournisseur= '{numpiece}' where nom_fournisseur= '{nummodif4}';");
+                                    int index = listeFournisseurs.FindIndex(x => x.Nom_fournisseur == nummodif4);
                                     listeFournisseurs[index].Siret_fournisseur = numpiece;
                                     Console.WriteLine("Fournisseur modifié");
                                     Console.WriteLine(listeFournisseurs[index].ToString());
                                 }
-                                if (key == 2)
+                                if (key4 == 2)
                                 {
                                     Console.WriteLine("Entrez le nouveau nom fournisseur");
                                     string numpiece = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Fournisseur set nom_fournisseur= '{numpiece}' where nom_fournisseur= '{nummodif}';");
-                                    int index = listeFournisseurs.FindIndex(x => x.Nom_fournisseur == nummodif);
+                                    Connection.update($"update Fournisseur set nom_fournisseur= '{numpiece}' where nom_fournisseur= '{nummodif4}';");
+                                    int index = listeFournisseurs.FindIndex(x => x.Nom_fournisseur == nummodif4);
                                     listeFournisseurs[index].Nom_fournisseur = numpiece;
                                     Console.WriteLine("Fournisseur modifié");
                                     Console.WriteLine(listeFournisseurs[index].ToString());
                                 }
-                                if (key == 3)
+                                if (key4 == 3)
                                 {
                                     Console.WriteLine("Entrez le nouveau contact fournisseur");
                                     string numpiece = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Fournisseur set contact_fournisseur= '{numpiece}' where nom_fournisseur= '{nummodif}';");
-                                    int index = listeFournisseurs.FindIndex(x => x.Nom_fournisseur == nummodif);
+                                    Connection.update($"update Fournisseur set contact_fournisseur= '{numpiece}' where nom_fournisseur= '{nummodif4}';");
+                                    int index = listeFournisseurs.FindIndex(x => x.Nom_fournisseur == nummodif4);
                                     listeFournisseurs[index].Contact_fournisseur = numpiece;
                                     Console.WriteLine("Fournisseur modifié");
                                     Console.WriteLine(listeFournisseurs[index].ToString());
                                 }
-                                if (key == 4)
+                                if (key4 == 4)
                                 {
                                     Console.WriteLine("Entrez la nouvelle adresse fournisseur");
                                     string numpiece = Convert.ToString(Console.ReadLine());
-                                    Connection.update($"update Founrisseur set adresse_fournisseur= '{numpiece}' where nom_fournisseur= '{nummodif}';");
-                                    int index = listeFournisseurs.FindIndex(x => x.Nom_fournisseur == nummodif);
+                                    Connection.update($"update Founrisseur set adresse_fournisseur= '{numpiece}' where nom_fournisseur= '{nummodif4}';");
+                                    int index = listeFournisseurs.FindIndex(x => x.Nom_fournisseur == nummodif4);
                                     listeFournisseurs[index].Adresse_fournisseur = numpiece;
                                     Console.WriteLine("Fournisseur modifié");
                                     Console.WriteLine(listeFournisseurs[index].ToString());
                                 }
-                                if (key == 5)
+                                if (key4 == 5)
                                 {
 
                                     Console.WriteLine("Entrez la nouvelle note fournisseur");
                                     int numpiece = Convert.ToInt32(Console.ReadLine());
-                                    Connection.update($"update Fournisseur set note_fournisseur= '{numpiece}' where nom_fournisseur= '{nummodif}';");
-                                    int index = listeFournisseurs.FindIndex(x => x.Nom_fournisseur == nummodif);
+                                    Connection.update($"update Fournisseur set note_fournisseur= '{numpiece}' where nom_fournisseur= '{nummodif4}';");
+                                    int index = listeFournisseurs.FindIndex(x => x.Nom_fournisseur == nummodif4);
                                     listeFournisseurs[index].Note_fournisseur = numpiece;
                                     Console.WriteLine("Fournisseur modifié");
                                     Console.WriteLine(listeFournisseurs[index].ToString());
@@ -831,65 +852,159 @@ namespace VeloMaxBDD
                         switch (caseSwitch7)
                         {
                             case 1:
-                                Console.WriteLine("Saisissez un numéro de commande (5 chiffres)");
-                                string No = Convert.ToString(Console.ReadLine());
-                                Console.WriteLine("Saisissez une date de commande (JJ/MM/AAAA) ");
-                                string nom = Convert.ToString(Console.ReadLine());
-                                Console.WriteLine("Saisissez une adresse de livraison (numéro,rue,ville)");
-                                string ad_livraison = Convert.ToString(Console.ReadLine());
-                                Console.WriteLine("Saisissez une date de livraison (JJ/MM/AAAA)");
-                                string date_livr = Convert.ToString(Console.ReadLine());
-                                Console.WriteLine("Saisissez un numéro de client");
-                                int numc = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("Saisissez le N° modèle désiré");
-                                string mod = Convert.ToString(Console.ReadLine());
-
-                                MySqlCommand commandstock = connexion.CreateCommand();
-                                commandstock.CommandText = ($"select p.stock from modele m join Production prod on m.no_modele=prod.no_modele join piece p on prod.no_piece=p.no_piece where m.no_modele='{mod}';");
-
-                                MySqlDataReader readerstock;
-                                readerstock = commandstock.ExecuteReader();
-                                List<string> listestock = new List<string>();
-
-                                while (readerstock.Read())
+                                int choix = 0;
+                                int choix2 = 1;
+                                while (choix2 == 1)
                                 {
-                                    string currentRowAsString = "";
-                                    for (int i = 0; i < readerstock.FieldCount; i++)
+                                    Console.WriteLine("Saisissez un numéro de commande (5 chiffres)");
+                                    string No = Convert.ToString(Console.ReadLine());
+                                    Console.WriteLine("Saisissez une date de commande (JJ/MM/AAAA) ");
+                                    string nom = Convert.ToString(Console.ReadLine());
+                                    Console.WriteLine("Saisissez une adresse de livraison (numéro,rue,ville)");
+                                    string ad_livraison = Convert.ToString(Console.ReadLine());
+                                    Console.WriteLine("Saisissez une date de livraison (JJ/MM/AAAA)");
+                                    string date_livr = Convert.ToString(Console.ReadLine());
+                                    Console.WriteLine("Saisissez un numéro de client");
+                                    int numc = Convert.ToInt32(Console.ReadLine());
+                                    int choix3 = 0;
+                                    while (choix3 == 0)
                                     {
-                                        string valueAsString = readerstock.GetValue(i).ToString();
-                                        currentRowAsString += valueAsString + ", ";
-                                        listestock.Add(currentRowAsString);
+                                        Console.WriteLine("Commande de modèle (1) ou de pièce (2)?");
+                                        choix = Convert.ToInt32(Console.ReadLine());
+                                        if (choix2 == 1 && choix == 1)
+                                        {
+                                            Console.WriteLine("Saisissez le N° modèle désiré");
+                                            string mod = Convert.ToString(Console.ReadLine());
+
+                                            MySqlCommand commandstock = connexion.CreateCommand();
+                                            commandstock.CommandText = ($"select p.stock from modele m join Production prod on m.no_modele=prod.no_modele join piece p on prod.no_piece=p.no_piece where m.no_modele='{mod}';");
+
+                                            MySqlDataReader readerstock;
+                                            readerstock = commandstock.ExecuteReader();
+                                            List<string> listestock = new List<string>();
+
+                                            while (readerstock.Read())
+                                            {
+                                                string currentRowAsString = "";
+                                                for (int i = 0; i < readerstock.FieldCount; i++)
+                                                {
+                                                    string valueAsString = readerstock.GetValue(i).ToString();
+                                                    currentRowAsString += valueAsString + ", ";
+                                                    listestock.Add(currentRowAsString);
+                                                }
+
+                                            }
+                                            readerstock.Close();
+                                            commandstock.Dispose();
+                                            int stockcheck = 1;
+                                            foreach (string s in listestock)
+                                            {
+                                                if (s == "0")
+                                                {
+                                                    Console.WriteLine("Il n'y a pas assez de stock, veuillez consulter les stocks");
+                                                    stockcheck = 0;
+                                                }
+                                            }
+                                            if (stockcheck == 1)
+                                            {
+
+
+                                                Commande c1 = new Commande(No, nom, ad_livraison, date_livr);
+                                                c1.CreateCommande();
+                                                Connection.update($"insert into devisParticulier values ('{numc}','{No}');");
+                                                Connection.update($"insert into commandeModele values ('{No}','{mod}');");
+                                                Connection.update($"update Piece p join Production pr on p.no_piece=pr.no_piece join Modele m on pr.no_modele=m.no_modele join commandeModele cm on m.no_modele=cm.no_modele set p.stock = stock - 1 where m.no_modele = '{mod}'; ");
+                                                listeCommandes.Add(c1);
+                                                Console.WriteLine();
+
+                                            }
+
+
+                                            Console.WriteLine("Continuer ? Oui (1)  Non (2)");
+                                            choix2 = Convert.ToInt32(Console.ReadLine());
+                                            if (choix2 == 2)
+                                            {
+                                                choix3 = 1;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                choix3 = 0;
+
+                                            }
+
+                                        }
+                                        if (choix2 == 1 && choix == 2)
+                                        {
+                                            Console.WriteLine("Saisissez un numéro de Pièce");
+                                            string pieceb = Convert.ToString(Console.ReadLine());
+                                            Console.WriteLine("Saisissez une quantité");
+                                            int qte2 = Convert.ToInt32(Console.ReadLine());
+                                            MySqlCommand commandstock2 = connexion.CreateCommand();
+                                            commandstock2.CommandText = ($"select stock from Piece where no_piece='{pieceb}';");
+
+                                            MySqlDataReader readerstock2;
+                                            readerstock2 = commandstock2.ExecuteReader();
+
+                                            int value = 0;
+                                            while (readerstock2.Read())
+                                            {
+
+                                                for (int i = 0; i < readerstock2.FieldCount; i++)
+                                                {
+                                                    value = Convert.ToInt32(readerstock2.GetValue(i));
+
+
+                                                }
+                                                Console.WriteLine(value);
+                                            }
+                                            readerstock2.Close();
+                                            commandstock2.Dispose();
+
+                                            int stockcheck2 = 1;
+                                            if (value < qte2)
+                                            {
+                                                Console.WriteLine("Il n'y a pas assez de stock pour une telle quantité");
+                                                stockcheck2 = 0;
+                                            }
+                                            if (stockcheck2 == 1)
+                                            {
+                                                int newval = value - qte2;
+                                                Commande c3 = new Commande(No, nom, ad_livraison, date_livr);
+                                                c3.CreateCommande();
+
+                                                Connection.update($"insert into devisParticulier values ('{numc}','{No}');");
+                                                Connection.update($"insert into commandePiece values ('{No}','{pieceb}','{qte2}');");
+                                                Connection.update($"update Piece set stock='{newval}' where no_piece='{pieceb}';");
+                                                listeCommandes.Add(c3);
+                                                Console.WriteLine();
+                                            }
+                                            Console.WriteLine("Continuer ? Oui (1)  Non (2)");
+                                            choix2 = Convert.ToInt32(Console.ReadLine());
+                                            if (choix2 == 2)
+                                            {
+                                                choix3 = 1;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                choix3 = 0;
+
+                                            }
+
+                                        }
                                     }
 
-                                }
-                                readerstock.Close();
-                                commandstock.Dispose();
-                                int stockcheck = 1;
-                                foreach (string s in listestock)
-                                {
-                                    if (s == "0")
-                                    {
-                                        Console.WriteLine("Il n'y a pas assez de stock, veuillez consulter les stocks");
-                                        stockcheck = 0;
-                                    }
-                                }
-                                if (stockcheck == 1)
-                                {
 
-
-                                    Commande c1 = new Commande(No, nom, ad_livraison, date_livr);
-                                    c1.CreateCommande();
-                                    Connection.update($"insert into devisParticulier values ('{numc}','{No}');");
-                                    Connection.update($"insert into commandeModele values ('{No}','{mod}');");
-                                    Connection.update($"update Piece p join Production pr on p.no_piece=pr.no_piece join Modele m on pr.no_modele=m.no_modele join commandeModele cm on m.no_modele=cm.no_modele set p.stock = stock - 1 where m.no_modele = '{mod}'; ");
-                                    listeCommandes.Add(c1);
                                     Console.WriteLine();
 
                                     Console.WriteLine("Appuyez sur entrée pour revenir au menu principal");
                                     Console.WriteLine();
-
                                 }
                                 break;
+
+
+
                             case 2:
                                 Console.WriteLine("Saisissez un numéro de commande (5 chiffres)");
                                 string No2 = Convert.ToString(Console.ReadLine());
@@ -940,13 +1055,13 @@ namespace VeloMaxBDD
                                     {
                                         Commande c5 = new Commande(No2, nom2, ad_livraison2, date_livr2);
                                         c5.CreateCommande();
-                                        
+
                                         Connection.update($"insert into devisBoutique values ('{No2}','{numb}');");
                                         Connection.update($"insert into commandeModele values ('{No2}','{modb}');");
 
                                         Connection.update($"update Piece p join Production pr on p.no_piece=pr.no_piece join Modele m on pr.no_modele=m.no_modele join commandeModele cm on m.no_modele=cm.no_modele set p.stock = stock - 1 where m.no_modele = '{modb}'; ");
                                         listeCommandes.Add(c5);
-                                        
+
                                     }
 
                                     Console.WriteLine();
@@ -992,12 +1107,12 @@ namespace VeloMaxBDD
                                         int newval = value - qte2;
                                         Commande c6 = new Commande(No2, nom2, ad_livraison2, date_livr2);
                                         c6.CreateCommande();
-                                        
+
                                         Connection.update($"insert into devisBoutique values ('{No2}','{numb}');");
                                         Connection.update($"insert into commandePiece values ('{No2}','{pieceb}','{qte2}');");
                                         Connection.update($"update Piece set stock='{newval}' where no_piece='{pieceb}';");
                                         listeCommandes.Add(c6);
-                                        
+
                                     }
 
                                     Console.WriteLine();
@@ -1006,8 +1121,8 @@ namespace VeloMaxBDD
                                     Console.WriteLine();
                                 }
                                 break;
-                            
-                                
+
+
                             case 3:
                                 Console.WriteLine("Saisissez le numéro de la commande à supprimer (5 chiffres)");
                                 string numsupp = Convert.ToString(Console.ReadLine());
@@ -1020,6 +1135,11 @@ namespace VeloMaxBDD
                                 Console.WriteLine();
                                 break;
                             case 4:
+                                foreach (Commande commande in listeCommandes)
+                                {
+                                    Console.WriteLine(commande.ToString());
+                                    Console.WriteLine();
+                                }
                                 Console.WriteLine("Entrez le N° de commande que vous voulez modifier :");
                                 string nummodif = Convert.ToString(Console.ReadLine());
                                 Console.WriteLine("Que voulez vous modifier ?");
@@ -1066,17 +1186,21 @@ namespace VeloMaxBDD
                                     Console.WriteLine(listeFournisseurs[index].ToString());
                                 }
 
+
                                 Console.WriteLine();
 
                                 Console.WriteLine("Appuyez sur entrée pour revenir au menu principal");
                                 Console.WriteLine();
                                 break;
-
                         }
                         break;
                     case 7:
                         Environment.Exit(0);
                         break;
+
+
+
+
 
                 }
 
