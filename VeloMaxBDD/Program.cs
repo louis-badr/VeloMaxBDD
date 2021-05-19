@@ -2,7 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Xml;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Xml.Serialization;
+
 
 namespace VeloMaxBDD
 {
@@ -27,62 +33,17 @@ namespace VeloMaxBDD
                 return;
             }
             #endregion
-            #region // lecture de la table particulier
-            List<Particulier> listeParticuliers = new List<Particulier>();
-            string requete6 = "Select * from particulier;";
-            MySqlCommand command6 = connexion.CreateCommand();
-            command6.CommandText = requete6;
-            MySqlDataReader reader6;
-            reader6 = command6.ExecuteReader();
 
-            while (reader6.Read())
-            {
-                for (int i = 0; i < reader6.FieldCount / 7; i = i + 7)
-                {
-                    listeParticuliers.Add(new Particulier(Convert.ToInt32(reader6.GetValue(i).ToString()), reader6.GetValue(i + 1).ToString(), reader6.GetValue(i + 2).ToString(), reader6.GetValue(i + 3).ToString(), reader6.GetValue(i + 4).ToString(), reader6.GetValue(i + 5).ToString(), reader6.GetValue(i + 6).ToString(), Convert.ToInt32(reader6.GetValue(i + 7).ToString())));
-                }
-            }
-            reader6.Close();
-            command6.Dispose();
-            /*
-            foreach (Particulier particulier in listeParticuliers)
-            {
-                Console.WriteLine(particulier.No_particulier + " | " + particulier.Nom_particulier + " | " + particulier.Prenom_particulier + " | " + particulier.Adresse_particulier + " | " + particulier.Tel_particulier + " | " + particulier.Mail_particulier + " | " + particulier.Date_souscription + " | " + particulier.No_programme);
-            }*/
-            #endregion
-            //double dateEnMois(string date)
-            //{
-            //    double[] tabDate = Array.ConvertAll(date.Split('/'), Double.Parse);
-            //    return tabDate[0] / 30.4167 + tabDate[1] + tabDate[2] * 12;
-            //}
-            //List<string> datesexp = new List<string>();
-            //List<string> dates = new List<string>();
-            //foreach (Particulier p in listeParticuliers)
-            //{
-            //    dates.Add(p.Date_souscription);
 
-            //}
-            //foreach (string date in dates)
-            //{
-            //    if ((dateEnMois(date) - dateEnMois(DateTime.Today.ToString()) <= 3))
-            //    {
-            //        datesexp.Add(date);
-         
-            //    }
-            //}
-
-            Choix_interface(connexion);
+            //Choix_interface(connexion);
 
             connexion.Close();
             Console.ReadKey();
 
 
         }
-        double dateEnMois(string date)
-        {
-            double[] tabDate = Array.ConvertAll(date.Split('/'), Double.Parse);
-            return tabDate[0] / 30.4167 + tabDate[1] + tabDate[2] * 12;
-        }
+        
+
         static void XML(MySqlConnection connexion)
         {
 
@@ -101,13 +62,96 @@ namespace VeloMaxBDD
             MySqlDataAdapter dataAdp = new MySqlDataAdapter(commande2);
             dataAdp.Fill(tableModele);
             tableModele.WriteXml(path);
-            Console.WriteLine("Le fichier .XML a bien été généré dans le répertoire " + path);
+            Console.WriteLine("Le fichier .XML a bien été généré dans le répertoire ");
             commande2.Dispose();
             connexion.Close();
 
 
         }
-        static void Choix_interface(MySqlConnection connexion)
+        static void AfficherPrettyJson(string nomFichier)
+        {
+            StreamReader reader = new StreamReader(nomFichier);
+            JsonTextReader jreader = new JsonTextReader(reader);
+            while (jreader.Read())
+            {
+                if (jreader.Value != null)
+                {
+                    if (jreader.TokenType.ToString() == "PropertyName")
+                    {
+                        Console.Write(jreader.Value + " : ");
+                    }
+                    else
+                    {
+                        Console.WriteLine(jreader.Value);
+                    }
+                }
+                else
+                {
+                    // Console.WriteLine("Token:{0} ", jreader.TokenType.ToString());
+                    if (jreader.TokenType.ToString() == "StartObject") Console.WriteLine("Nouvel objet\n--------------");
+                    if (jreader.TokenType.ToString() == "EndObject") Console.WriteLine("-------------\n");
+                    if (jreader.TokenType.ToString() == "StartArray") Console.WriteLine("Liste\n");
+                }
+            }
+            jreader.Close();
+            reader.Close();
+        }
+        static void Lecture(string nomFichier)
+        {
+            XmlDocument docXml = new XmlDocument();
+            docXml.Load(nomFichier);
+
+            XmlElement racine = docXml.DocumentElement;
+
+
+            Console.WriteLine("racine : " + racine.Name);
+
+            Console.WriteLine();
+            foreach (XmlNode e in racine)
+            {
+                Console.WriteLine("balise : " + e.Name);
+
+                if (e.ChildNodes != null)
+                {
+                    foreach (XmlAttribute a in e.Attributes)
+                    {
+                        Console.Write("  attribute :");
+                        Console.Write(" name = " + a.Name);
+                        Console.WriteLine(", value : " + a.Value);
+                    }
+
+                    foreach (XmlNode e2 in e)
+                    {
+                        if (e2.NodeType == XmlNodeType.Text)
+                        {
+                            Console.WriteLine("  InnerText : " + e2.InnerText);
+                            // pour info : Console.WriteLine(e2.Name);  // affiche #text
+                        }
+                        else
+                        {
+                            Console.WriteLine("  type : " + e2.NodeType + ", nom : " + e2.Name);
+
+                            foreach (XmlAttribute a2 in e.Attributes)
+                            {
+                                Console.Write("  attribute :");
+                                Console.Write(" name = " + a2.Name);
+                                Console.WriteLine(", value : " + a2.Value);
+                            }
+                            foreach (XmlNode e3 in e)
+                            {
+                                if (e2.NodeType == XmlNodeType.Text)
+                                {
+                                    Console.WriteLine("  InnerText : " + e2.InnerText);
+                                    // pour info : Console.WriteLine(e2.Name);  // affiche #text
+                                }
+                                // continuer en profondeur... pourquoi pas récursivement
+                            }
+                        }
+                    }
+                }
+            }
+        }
+            static void Choix_interface(MySqlConnection connexion)
         {
             #region // lecture de la table pièce
             List<Piece> listePieces = new List<Piece>();
@@ -250,6 +294,30 @@ namespace VeloMaxBDD
             }*/
             #endregion
 
+            double dateEnMois(string date2)
+            {
+                double[] tabDate = Array.ConvertAll(date2.Split('/'), Double.Parse);
+                return tabDate[0] / 30.4167 + tabDate[1] + tabDate[2] * 12;
+            }
+            #region // conversion dates
+            List<string> date = new List<string>();
+            List<string> datexp = new List<string>();
+            List<string []> datexp2 = new List<string[]>();
+            foreach (Particulier p in listeParticuliers)
+            {
+                date.Add(p.Date_souscription);
+            }
+            foreach (string da in date)
+            {
+                if ((dateEnMois(da) - dateEnMois(DateTime.Today.ToString("d")) < 2))
+                {
+                    datexp.Add(da);
+                    
+
+                    
+                }
+            }
+            #endregion
             bool quit = false;
             while (quit == false)
             {
@@ -1541,11 +1609,16 @@ namespace VeloMaxBDD
                         Console.WriteLine();
                         Console.WriteLine("Date d'expiration des adhésions -> N° client, Nom client, Prenom client, Date expiration ");
                         Console.WriteLine();
+                        foreach (string d in datexp)
+                        {
+                            Console.WriteLine(dateEnMois(d)+dateEnMois(DateTime.Today.ToString("d")));
+                        }
+                        Console.WriteLine();
                         Console.WriteLine("Client ayant acheté le plus de pièces -> N° client, Nom client, Prenom client, Quantité commandée");
                         Connection.select("select Particulier.no_particulier, Particulier.nom_particulier, Particulier.prenom_particulier, CommandePiece.qte_piece_commande from Particulier join devisParticulier on devisParticulier.no_particulier = Particulier.no_particulier join CommandePiece on devisParticulier.no_commande=CommandePiece.no_commande where commandePiece.qte_piece_commande = (select max(CommandePiece.qte_piece_commande) from CommandePiece join devisParticulier on CommandePiece.no_commande=devisParticulier.no_commande join Particulier on devisParticulier.no_particulier=particulier.no_particulier);");
                         Console.WriteLine();
                         Console.WriteLine("Prix moyen des commandes avec vélo et pièces -> N° commande, Prix moyen");
-                        Connection.select("select commande.no_commande,avg(modele.prix_modele+piece.prix_piece) from modele join commandeModele on modele.no_modele=commandeModele.no_modele join commandePiece on commandeModele.no_commande=commandePiece.no_commande join piece on commandePiece.no_piece=piece.no_piece join commande on commandePiece.no_commande=commande.no_commande group by commande.no_commande;");
+                        Connection.select("select commande.no_commande,round(avg(modele.prix_modele+piece.prix_piece)) from modele join commandeModele on modele.no_modele=commandeModele.no_modele join commandePiece on commandeModele.no_commande=commandePiece.no_commande join piece on commandePiece.no_piece=piece.no_piece join commande on commandePiece.no_commande=commande.no_commande group by commande.no_commande;");
                         Console.WriteLine();
                         Console.WriteLine("Prix moyen des commandes vélo -> N° commande, Prix moyen ");
                         Connection.select("select commande.no_commande ,round(avg(modele.prix_modele)) from modele join commandeModele on modele.no_modele=commandeModele.no_modele join commande on commandeModele.no_commande=commande.no_commande group by commande.no_commande;");
@@ -1604,12 +1677,35 @@ namespace VeloMaxBDD
                         if (Console.ReadKey().Key == ConsoleKey.Enter)
                         {
                             Console.WriteLine();
-                            Console.WriteLine("Export de la table Modèle...");
+                            Console.WriteLine("Export de la table Modèle en XML...");
                             Console.WriteLine();
                             XML(connexion);
                             Console.WriteLine();
-                            Console.WriteLine("Appuyez sur entrée pour revenir au menu principal");
+                            
+                            Console.WriteLine("Appuyez sur la touche entrée");
 
+                        }
+                        if (Console.ReadKey().Key == ConsoleKey.Enter)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Export de la table Modèle en JSON...");
+                            Console.WriteLine();
+                            string fileToWrite = "C:/Users/vaymo/Documents/ESILV/A3/BDD et interop/Probleme final/Modele.json";
+                            StreamWriter fileWriter = new StreamWriter(fileToWrite);
+                            JsonTextWriter jsonWriter = new JsonTextWriter(fileWriter);
+
+                            // sérialisation des objets vers le flux d'écriture fichier
+                            JsonSerializer serializer = new JsonSerializer();
+                            serializer.Serialize(jsonWriter, listeModeles);
+
+                            //fermture des flux (writer)
+                            jsonWriter.Close();
+                            fileWriter.Close();
+                            Console.WriteLine("Le fichier .JSON a bien été généré dans le répertoire");
+                            Console.WriteLine();
+                            AfficherPrettyJson(fileToWrite);
+                            Console.WriteLine();
+                            Console.WriteLine("Appuyez sur entrée pour revenir au menu principal");
                         }
                         break;
                     case 10:

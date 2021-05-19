@@ -104,6 +104,10 @@ namespace VeloMaxBDD
             }
 
         }
+        public override string ToString()
+        {
+            return no_boutique + " | " + nom_boutique + " | " + adresse_boutique + " | " + tel_boutique + " | " + mail_boutique + " | " + contact_boutique + " | " + remise_boutique;
+        }
         public void CreateBoutique()
         {
 
