@@ -1526,6 +1526,54 @@ namespace VeloMaxBDD
                         break;
                     case 7:
                         // gestion stock
+                        Console.WriteLine("Quel stock de pièces souhaitez-vous afficher ?");
+                        Console.WriteLine("1. Stock par pièce \n2. Stock par fournisseur \n3. Stock par ligne de vélo \n4. Stock par marque \n5. Stock par catégorie de vélo");
+                        int caseSwitch8 = Convert.ToInt32(Console.ReadLine());
+                        switch (caseSwitch8)
+                        {
+                            case 1:
+                                Console.WriteLine("---------------------------------------");
+                                Console.WriteLine("N° de pièce | Nombre de pièces en stock");
+                                Console.WriteLine("---------------------------------------");
+                                foreach(Piece p in listePieces)
+                                {
+                                    Console.WriteLine(p.No_piece + " | " + p.Stock);
+                                }
+                                break;
+                            case 2:
+                                Console.WriteLine("------------------------------------------------------------");
+                                Console.WriteLine("Nom du fournisseur | N° de pièce | Nombre de pièces en stock");
+                                Console.WriteLine("------------------------------------------------------------");
+                                Connection.select("select f.nom_fournisseur,p.no_piece,p.stock from piece p join livraison l join fournisseur f on p.no_piece=l.no_piece and l.siret_fournisseur=f.siret_fournisseur;");
+                                break;
+                            case 3:
+                                Console.WriteLine("Tapez la ligne de vélo à afficher parmi cette liste :");
+                                Connection.select("select distinct ligne from modele;");
+                                string rep = Console.ReadLine();
+                                Console.WriteLine("---------------------------------------");
+                                Console.WriteLine("N° de pièce | Nombre de pièces en stock");
+                                Console.WriteLine("---------------------------------------");
+                                Connection.select("select p.no_piece,p.stock from piece p join production p1 join modele m on p.no_piece=p1.no_piece and p1.no_modele=m.no_modele where m.ligne='"+rep+"';");
+                                break;
+                            case 4:
+                                Console.WriteLine("Tapez la marque de vélo à afficher parmi cette liste :");
+                                Connection.select("select distinct nom_modele from modele;");
+                                string rep1 = Console.ReadLine();
+                                Console.WriteLine("---------------------------------------");
+                                Console.WriteLine("N° de pièce | Nombre de pièces en stock");
+                                Console.WriteLine("---------------------------------------");
+                                Connection.select("select p.no_piece,p.stock from piece p join production p1 join modele m on p.no_piece=p1.no_piece and p1.no_modele=m.no_modele where m.nom_modele='" + rep1 + "';");
+                                break;
+                            case 5:
+                                Console.WriteLine("Tapez la catégorie de vélo à afficher parmi cette liste :");
+                                Connection.select("select distinct grandeur from modele;");
+                                string rep2 = Console.ReadLine();
+                                Console.WriteLine("---------------------------------------");
+                                Console.WriteLine("N° de pièce | Nombre de pièces en stock");
+                                Console.WriteLine("---------------------------------------");
+                                Connection.select("select p.no_piece,p.stock from piece p join production p1 join modele m on p.no_piece=p1.no_piece and p1.no_modele=m.no_modele where m.grandeur='" + rep2 + "';");
+                                break;
+                        }
                         break;
                     case 8:
                         Console.WriteLine();

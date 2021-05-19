@@ -8,7 +8,7 @@ namespace VeloMaxBDD
 
         public static string connectionString = "SERVER=localhost;PORT=3306;" +
                                          "DATABASE=veloMax;" +
-                                         "UID=root;PASSWORD=Valou1234";
+                                         "UID=root;PASSWORD=root";
         public static void update (string mySQLCommand)
         {
             MySqlConnection connection = new MySqlConnection(Connection.connectionString);
@@ -45,7 +45,7 @@ namespace VeloMaxBDD
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
                     string valueAsString = reader.GetValue(i).ToString();
-                    currentRowAsString += valueAsString + ", ";
+                    currentRowAsString += valueAsString + " | ";
                 }
                 Console.WriteLine(currentRowAsString);
             }
