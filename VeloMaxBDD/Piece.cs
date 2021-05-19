@@ -11,12 +11,12 @@ namespace VeloMaxBDD
     class Piece
     {
         // Attributs d'instance
-        string no_piece;
-        string desc_piece;
-        string date_intro_piece;
-        string date_disco_piece;
-        int prix_piece;
-        int stock;
+        public string no_piece;
+        public string desc_piece;
+        public string date_intro_piece;
+        public string date_disco_piece;
+        public int prix_piece;
+        public int stock;
 
         public Piece(string no_piece, string desc_piece, string date_intro_piece, string date_disco_piece,int prix_piece ,int stock)
         {
@@ -43,7 +43,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update piece set desc_piece= '{value}' where desc_piece= '{desc_piece}';");
+                Connection.update($"update piece set desc_piece= '{value}' where no_piece= '{no_piece}';");
                 desc_piece = value;
             }
         }
@@ -53,7 +53,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update piece set date_intro_piece= '{value}' where date_intro_piece= '{date_intro_piece};");
+                Connection.update($"update piece set date_intro_piece= '{value}' where no_piece= '{no_piece};");
                 date_intro_piece = value;
             }
         }
@@ -63,7 +63,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update piece set date_disco_piece= '{value}' where date_disco_piece= '{date_disco_piece}';");
+                Connection.update($"update piece set date_disco_piece= '{value}' where no_piece= '{no_piece}';");
                 date_disco_piece = value;
             }
         }
@@ -73,7 +73,7 @@ namespace VeloMaxBDD
             set
             {
 
-                Connection.update($"update piece set prix_piece= '{value}' where prix_piece= '{prix_piece}';");
+                Connection.update($"update piece set prix_piece= '{value}' where no_piece= '{no_piece}';");
                 prix_piece = value;
             }
         }
@@ -83,7 +83,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update piece set stock= '{value}' where stock= '{stock}';");
+                Connection.update($"update piece set stock= '{value}' where no_piece= '{no_piece}';");
                 stock = value;
             }
         }

@@ -73,6 +73,7 @@ namespace VeloMaxBDD
 
             Choix_interface(connexion);
 
+            
             connexion.Close();
             Console.ReadKey();
 
@@ -249,6 +250,53 @@ namespace VeloMaxBDD
                 Console.WriteLine(particulier.No_particulier + " | " + particulier.Nom_particulier + " | " + particulier.Prenom_particulier + " | " + particulier.Adresse_particulier + " | " + particulier.Tel_particulier + " | " + particulier.Mail_particulier + " | " + particulier.Date_souscription + " | " + particulier.No_programme);
             }*/
             #endregion
+
+            XmlDocument docXml = new XmlDocument();
+            XmlElement racine = docXml.CreateElement("stocksFaibles");
+            docXml.AppendChild(racine);
+            XmlDeclaration xmldecl = docXml.CreateXmlDeclaration("1.0", "UTF-8", "no");
+            docXml.InsertBefore(xmldecl, racine);
+            void exportPieceXML(Piece p)
+            {
+                XmlElement Piece = docXml.CreateElement("Piece");
+                racine.AppendChild(Piece);
+
+                XmlAttribute no = docXml.CreateAttribute("no");
+                no.Value = p.no_piece;
+                Piece.SetAttributeNode(no);
+
+                XmlElement description = docXml.CreateElement("description");
+                description.InnerText = p.desc_piece;
+                Piece.AppendChild(description);
+
+                XmlElement introduction = docXml.CreateElement("introduction");
+                introduction.InnerText = p.Date_intro_piece;
+                Piece.AppendChild(introduction);
+
+                XmlElement discontinuité = docXml.CreateElement("discontinuité");
+                discontinuité.InnerText = p.Date_disco_piece;
+                Piece.AppendChild(discontinuité);
+
+                XmlElement prix = docXml.CreateElement("prix");
+                prix.InnerText = p.Prix_piece.ToString();
+                Piece.AppendChild(prix);
+
+                XmlElement stock = docXml.CreateElement("stock");
+                stock.InnerText = p.Stock.ToString();
+                Piece.AppendChild(stock);
+
+                //XmlElement fournisseur = docXml.CreateElement("fournisseur");
+                //fournisseur.InnerText = Connection.select("select l.siret_fournisseur from livraison l join piece p on l.no_piece=p.no_piece where p.no_piece='" + p.No_piece + "';");
+                //Piece.AppendChild(fournisseur);
+            }
+            foreach (Piece p in listePieces)
+            {
+                if (p.Stock <= 2)
+                {
+                    exportPieceXML(p);
+                }
+            }
+            docXml.Save("stocksFaibles.xml");
 
             bool quit = false;
             while (quit == false)
