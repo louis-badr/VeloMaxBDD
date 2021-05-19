@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
+using System.Xml.XPath;
 
 namespace VeloMaxBDD
 {
     class Particulier
     {
-        string no_particulier;
-        string nom_particulier;
-        string prenom_particulier;
-        string adresse_particulier;
-        string tel_particulier;
-        string mail_particulier;
-        string date_souscription;
-        int no_programme;
+        public string no_particulier;
+        public string nom_particulier;
+        public string prenom_particulier;
+        public string adresse_particulier;
+        public string tel_particulier;
+        public string mail_particulier;
+        public string date_souscription;
+        public int no_programme;
 
         public Particulier(string no_particulier, string nom_particulier, string prenom_particulier, string adresse_particulier, string tel_particulier, string mail_particulier,string date_souscription, int no_programme)
         {
@@ -27,7 +31,6 @@ namespace VeloMaxBDD
             this.mail_particulier = mail_particulier;
             this.date_souscription = date_souscription;
             this.no_programme = no_programme;
-
         }
         public string No_particulier
         {

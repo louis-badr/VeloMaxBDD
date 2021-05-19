@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
+using System.Xml.XPath;
 
 namespace VeloMaxBDD
 {
@@ -12,7 +16,6 @@ namespace VeloMaxBDD
     {
         static void Main(string[] args)
         {
-
             MySqlConnection connexion = null;
             try
             {
@@ -195,6 +198,64 @@ namespace VeloMaxBDD
             }
             Console.WriteLine();
 
+            XmlDocument docXml = new XmlDocument();
+            XmlElement racine = docXml.CreateElement("particuliersSouscription");
+            docXml.AppendChild(racine);
+            XmlDeclaration xmldecl = docXml.CreateXmlDeclaration("1.0", "UTF-8", "no");
+            docXml.InsertBefore(xmldecl, racine);
+
+            void exportParticulierXML(Particulier p)
+            {
+                XmlElement Particulier = docXml.CreateElement("Particulier");
+                racine.AppendChild(Particulier);
+
+                XmlAttribute no = docXml.CreateAttribute("no");
+                no.Value = p.no_particulier;
+                Particulier.SetAttributeNode(no);
+
+                XmlElement nom = docXml.CreateElement("nom");
+                nom.InnerText = p.nom_particulier;
+                Particulier.AppendChild(nom);
+
+                XmlElement prenom = docXml.CreateElement("prenom");
+                prenom.InnerText = p.prenom_particulier;
+                Particulier.AppendChild(prenom);
+
+                XmlElement adresse = docXml.CreateElement("adresse");
+                adresse.InnerText = p.adresse_particulier;
+                Particulier.AppendChild(adresse);
+
+                XmlElement telephone = docXml.CreateElement("telephone");
+                telephone.InnerText = p.tel_particulier;
+                Particulier.AppendChild(telephone);
+
+                XmlElement mail = docXml.CreateElement("mail");
+                mail.InnerText = p.mail_particulier;
+                Particulier.AppendChild(mail);
+
+                XmlElement dateSouscription = docXml.CreateElement("dateSouscription");
+                dateSouscription.InnerText = p.date_souscription;
+                Particulier.AppendChild(dateSouscription);
+            }
+
+            foreach (Particulier p in listeParticuliers)
+            {
+                if(dateEnMois(DateTime.Today.ToString("d")) - dateEnMois(p.Date_souscription) <= 2)
+                {
+                    exportParticulierXML(p);
+                }
+            }
+            Console.WriteLine(listeParticuliers[0].Date_souscription);
+            // enregistrement du document XML   ==> à retrouver dans le dossier bin\Debug de Visual Studio
+            docXml.Save("particuliersSouscription.xml");
+
+            double dateEnMois(string date)
+            {
+                double[] tabDate = Array.ConvertAll(date.Split('/'),Double.Parse);
+                return tabDate[0]/30.4167+tabDate[1]+tabDate[2]*12;
+            }
+            Console.WriteLine(dateEnMois(listeParticuliers[0].Date_souscription));
+            Console.WriteLine(listeParticuliers[0].Date_souscription.GetType());
             Choix_interface();
             //exo(connexion);
             connexion.Close();
