@@ -83,7 +83,7 @@ namespace VeloMaxBDD
 
             Connection.update($"insert into Fournisseur values ('{siret_fournisseur}','{nom_fournisseur}','{contact_fournisseur}','{adresse_fournisseur}','{note_fournisseur}');");
             Console.WriteLine("Voici le fournisseur créé : \n");
-            Connection.select($"select * from Fournisseur where nom_fournisseur= + '{nom_fournisseur}' + ;");
+            Connection.select($"select * from Fournisseur where nom_fournisseur= '{nom_fournisseur}';");
         }
     }
 }

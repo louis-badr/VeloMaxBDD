@@ -15,14 +15,16 @@ namespace VeloMaxBDD
         string desc_piece;
         string date_intro_piece;
         string date_disco_piece;
+        int prix_piece;
         int stock;
 
-        public Piece(string no_piece, string desc_piece, string date_intro_piece, string date_disco_piece, int stock)
+        public Piece(string no_piece, string desc_piece, string date_intro_piece, string date_disco_piece,int prix_piece ,int stock)
         {
             this.no_piece = no_piece;
             this.desc_piece = desc_piece;
             this.date_intro_piece = date_intro_piece;
             this.date_disco_piece = date_disco_piece;
+            this.prix_piece = prix_piece;
             this.stock = stock;
         }
         public string No_piece
@@ -41,7 +43,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update piece set desc_piece= '{value}' where no_piece= '{no_piece}';");
+                Connection.update($"update piece set desc_piece= '{value}' where desc_piece= '{desc_piece}';");
                 desc_piece = value;
             }
         }
@@ -51,7 +53,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update piece set date_intro_piece= '{value}' where no_piece= '{no_piece};");
+                Connection.update($"update piece set date_intro_piece= '{value}' where date_intro_piece= '{date_intro_piece};");
                 date_intro_piece = value;
             }
         }
@@ -61,8 +63,18 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update piece set date_disco_piece= '{value}' where no_piece= '{no_piece}';");
+                Connection.update($"update piece set date_disco_piece= '{value}' where date_disco_piece= '{date_disco_piece}';");
                 date_disco_piece = value;
+            }
+        }
+        public int Prix_piece
+        {
+            get { return prix_piece; }
+            set
+            {
+
+                Connection.update($"update piece set prix_piece= '{value}' where prix_piece= '{prix_piece}';");
+                prix_piece = value;
             }
         }
         public int Stock
@@ -71,18 +83,18 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update piece set stock= '{value}' where no_piece= '{no_piece}';");
+                Connection.update($"update piece set stock= '{value}' where stock= '{stock}';");
                 stock = value;
             }
         }
         public override string ToString()
         {
-            return no_piece + " | " + desc_piece + " | " + date_intro_piece + " | " + date_disco_piece + " | " + stock;
+            return no_piece + " | " + desc_piece + " | " + date_intro_piece + " | " + date_disco_piece + " | " + prix_piece + " euros | " + stock;
         }
         public void CreatePiece()
         {
             
-            Connection.update($"insert into Piece values ('{no_piece}','{desc_piece}','{date_intro_piece}','{date_disco_piece}','{stock}');");
+            Connection.update($"insert into Piece values ('{no_piece}','{desc_piece}','{date_intro_piece}','{date_disco_piece}','{prix_piece}',{stock}');");
             Console.WriteLine("Voici la pièce créée : \n");
             Connection.select($"select * from Piece where no_piece= '{no_piece}' ;");
         }

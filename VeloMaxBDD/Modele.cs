@@ -99,14 +99,14 @@ namespace VeloMaxBDD
         }
         public override string ToString()
         {
-            return no_modele + " | " + nom_modele + " | " + grandeur + " | " + prix_modele + " | " + ligne + " | " + date_intro_modele + " | " + date_disco_modele;
+            return no_modele + " | " + nom_modele + " | " + grandeur + " | " + prix_modele + "euros | " + ligne + " | " + date_intro_modele + " | " + date_disco_modele;
         }
         public void CreateModele()
         {
 
             Connection.update($"insert into Modele values ('{no_modele}','{nom_modele}',{grandeur}','{prix_modele}','{ligne}','{date_intro_modele}','{date_disco_modele}');");
             Console.WriteLine("Voici le modele créé : \n");
-            Connection.select($"select * from Modele where no_modele= + '{no_modele}' + ;");
+            Connection.select($"select * from Modele where no_modele= '{no_modele}' ;");
         }
     }
 }

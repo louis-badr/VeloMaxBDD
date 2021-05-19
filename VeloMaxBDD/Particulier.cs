@@ -126,7 +126,7 @@ namespace VeloMaxBDD
 
             Connection.update($"insert into Particulier values ('{no_particulier}','{nom_particulier}','{prenom_particulier}','{adresse_particulier}','{tel_particulier}','{mail_particulier}','{date_souscription}','{no_programme}');");
             Console.WriteLine("Voici le particulier créé : \n");
-            Connection.select($"select * from Particulier where no_particulier= + '{no_particulier}' + ;");
+            Connection.select($"select * from Particulier where no_particulier=  '{no_particulier}';");
         }
     }
 }

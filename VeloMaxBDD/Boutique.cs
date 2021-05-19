@@ -33,7 +33,7 @@ namespace VeloMaxBDD
             set
             {
                 no_boutique = value;
-                Connection.update("update Boutique set no_boutique=" + value + " where no_boutique=" + no_boutique);
+                Connection.update($"update Boutique set no_boutique= '{value}' where no_boutique= '{no_boutique}';");
 
             }
 
@@ -44,7 +44,7 @@ namespace VeloMaxBDD
             set
             {
                 nom_boutique = value;
-                Connection.update("update Boutique set nom_boutique=" + value + " where nom_boutique=" + nom_boutique);
+                Connection.update($"update Boutique set nom_boutique= '{value}' where nom_boutique= '{nom_boutique}';");
 
             }
 
@@ -55,7 +55,7 @@ namespace VeloMaxBDD
             set
             {
                 adresse_boutique = value;
-                Connection.update("update Boutique set adresse_boutique=" + value + " where adresse_boutique=" + adresse_boutique);
+                Connection.update($"update Boutique set adresse_boutique= '{value}' where adresse_boutique= '{adresse_boutique}';");
 
             }
 
@@ -66,7 +66,7 @@ namespace VeloMaxBDD
             set
             {
                 tel_boutique = value;
-                Connection.update("update Boutique set tel_boutique=" + value + " where tel_boutique=" + tel_boutique);
+                Connection.update($"update Boutique set tel_boutique= '{value}' where tel_boutique= '{tel_boutique}';");
 
             }
 
@@ -77,7 +77,7 @@ namespace VeloMaxBDD
             set
             {
                 mail_boutique = value;
-                Connection.update("update Boutique set mail_boutique=" + value + " where mail_boutique=" + mail_boutique);
+                Connection.update($"update Boutique set mail_boutique= '{value}' where mail_boutique= '{mail_boutique}';");
 
             }
 
@@ -88,7 +88,7 @@ namespace VeloMaxBDD
             set
             {
                 contact_boutique = value;
-                Connection.update("update Boutique set contact_boutique=" + value + " where contact_boutique=" + contact_boutique);
+                Connection.update($"update Boutique set contact_boutique= '{value}' where contact_boutique= '{contact_boutique}';");
 
             }
 
@@ -99,7 +99,7 @@ namespace VeloMaxBDD
             set
             {
                 remise_boutique = value;
-                Connection.update("update Boutique set remise_boutique=" + value + " where remise_boutique=" + remise_boutique);
+                Connection.update($"update Boutique set remise_boutique= '{value}' where remise_boutique= '{remise_boutique}';");
 
             }
 
@@ -109,7 +109,7 @@ namespace VeloMaxBDD
 
             Connection.update($"insert into Boutique values ('{no_boutique}','{nom_boutique}',{adresse_boutique}',{tel_boutique}','{mail_boutique}','{contact_boutique}','{remise_boutique}');");
             Console.WriteLine("Voici la boutique créée : \n");
-            Connection.select("select * from Boutique where nom_boutique=" + nom_boutique + ";");
+            Connection.select($"select * from Boutique where nom_boutique= '{nom_boutique}';");
         }
     }
 }
