@@ -25,7 +25,7 @@ namespace VeloMaxBDD
             set
             {
 
-                Connection.update($"update Fournisseur set siret_fournisseur= '{value}' where siret_fournisseur= '{siret_fournisseur}';");
+                Connection.update($"update Fournisseur set siret_fournisseur= '{value}' where nom_fournisseur= '{nom_fournisseur}';");
                 siret_fournisseur = value;
             }
 
@@ -47,7 +47,7 @@ namespace VeloMaxBDD
             set
             {
 
-                Connection.update($"update Fournisseur set contact_fournisseur= { value}' where contact_fournisseur= '{contact_fournisseur}';");
+                Connection.update($"update Fournisseur set contact_fournisseur= { value}' where nom_fournisseur= '{nom_fournisseur}';");
                 contact_fournisseur = value;
             }
 
@@ -58,7 +58,7 @@ namespace VeloMaxBDD
             set
             {
 
-                Connection.update($"update Fournisseur set adresse_fournisseur= '{value}' where adresse_fournisseur= '{adresse_fournisseur}';");
+                Connection.update($"update Fournisseur set adresse_fournisseur= '{value}' where nom_fournisseur= '{nom_fournisseur}';");
                 adresse_fournisseur = value;
             }
 
@@ -69,7 +69,7 @@ namespace VeloMaxBDD
             set
             {
 
-                Connection.update($"update Fournisseur set note_fournisseur= '{value}' where note_fournisseur= '{note_fournisseur}';");
+                Connection.update($"update Fournisseur set note_fournisseur= '{value}' where nom_fournisseur= '{nom_fournisseur}';");
                 note_fournisseur = value;
             }
 

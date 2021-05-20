@@ -46,7 +46,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Particulier set nom_particulier= '{value}' where nom_particulier= '{nom_particulier}';");
+                Connection.update($"update Particulier set nom_particulier= '{value}' where no_particulier= '{no_particulier}';");
                 nom_particulier = value;
             }
 
@@ -57,7 +57,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Particulier set prenom_particulier= '{value}'  where prenom_particulier=  '{prenom_particulier}';");
+                Connection.update($"update Particulier set prenom_particulier= '{value}'  where no_particulier=  '{no_particulier}';");
                 prenom_particulier = value;
             }
 
@@ -68,7 +68,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Particulier set adresse_particulier= '{value}' where adresse_particulier= '{adresse_particulier}';");
+                Connection.update($"update Particulier set adresse_particulier= '{value}' where no_particulier= '{no_particulier}';");
                 adresse_particulier = value;
             }
 
@@ -79,7 +79,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Particulier set tel_particulier= '{value}'  where tel_particulier=  '{tel_particulier}';");
+                Connection.update($"update Particulier set tel_particulier= '{value}'  where no_particulier=  '{no_particulier}';");
                 tel_particulier = value;
             }
 
@@ -90,7 +90,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Particulier set mail_particulier='{ value}' where mail_particulier= '{ mail_particulier}';");
+                Connection.update($"update Particulier set mail_particulier='{ value}' where no_particulier= '{ no_particulier}';");
                 mail_particulier = value;
             }
 
@@ -101,7 +101,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Particulier set date_souscription= '{value}' where date_souscription= '{date_souscription}';");
+                Connection.update($"update Particulier set date_souscription= '{value}' where no_particulier= '{no_particulier}';");
                 date_souscription = value;
             }
 
@@ -112,7 +112,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Particulier set no_programme= '{value}' where no_programme= '{no_programme}';");
+                Connection.update($"update Particulier set no_programme= '{value}' where no_particulier= '{no_particulier}';");
                 no_programme = value;
             }
 

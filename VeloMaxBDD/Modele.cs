@@ -43,7 +43,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Modele set nom_modele= '{value}' where nom_modele= '{nom_modele}';");
+                Connection.update($"update Modele set nom_modele= '{value}' where no_modele= '{no_modele}';");
                 nom_modele = value;
             }
         }
@@ -53,7 +53,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Modele set grandeur= '{value}'  where grandeur= '{grandeur}';");
+                Connection.update($"update Modele set grandeur= '{value}'  where no_modele= '{no_modele}';");
                 grandeur = value;
             }
         }
@@ -63,7 +63,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Modele set prix_modele= '{value}' where prix_modele= '{prix_modele}';");
+                Connection.update($"update Modele set prix_modele= '{value}' where no_modele= '{no_modele}';");
                 prix_modele = value;
             }
         }
@@ -73,7 +73,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Modele set ligne= '{value}' where ligne= '{ligne}';");
+                Connection.update($"update Modele set ligne= '{value}' where no_modele= '{no_modele}';");
                 ligne = value;
             }
         }
@@ -83,7 +83,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Modele set date_intro_modele= '{value}' where date_intro_modele= '{date_intro_modele}';");
+                Connection.update($"update Modele set date_intro_modele= '{value}' where no_modele= '{no_modele}';");
                 date_intro_modele = value;
             }
         }
@@ -93,7 +93,7 @@ namespace VeloMaxBDD
             set
             {
                 
-                Connection.update($"update Modele set date_disco_modele= '{value}' where date_disco_modele= '{date_disco_modele}';");
+                Connection.update($"update Modele set date_disco_modele= '{value}' where no_modele= '{no_modele}';");
                 date_disco_modele = value;
             }
         }

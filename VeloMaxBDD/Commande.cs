@@ -36,7 +36,7 @@ namespace VeloMaxBDD
             set
             {
 
-                Connection.update($"update Commande set date_commande= '{ value}' where date_commande= '{ date_commande}';");
+                Connection.update($"update Commande set date_commande= '{ value}' where no_commande= '{ no_commande}';");
                 date_commande = value;
             }
 
@@ -47,7 +47,7 @@ namespace VeloMaxBDD
             set
             {
 
-                Connection.update($"update Commande set adresse_livraison= '{value}'  where adresse_livraison= '{ adresse_livraison}';");
+                Connection.update($"update Commande set adresse_livraison= '{value}'  where no_commande= '{ no_commande}';");
                 adresse_livraison = value;
             }
 
@@ -58,7 +58,7 @@ namespace VeloMaxBDD
             set
             {
 
-                Connection.update($"update Commande set date_livraison= '{value}' where date_livraison= '{date_livraison}';");
+                Connection.update($"update Commande set date_livraison= '{value}' where no_commande= '{no_commande}';");
                 date_livraison = value;
             }
 
