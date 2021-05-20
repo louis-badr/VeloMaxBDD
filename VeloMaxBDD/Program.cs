@@ -23,7 +23,7 @@ namespace VeloMaxBDD
             {
                 string connexionString = "SERVER=localhost;PORT=3306;" +
                                          "DATABASE=veloMax;" +
-                                         "UID=root;PASSWORD=root";
+                                         "UID=bozo;PASSWORD=bozo";
 
                 connexion = new MySqlConnection(connexionString);
                 connexion.Open();
@@ -35,58 +35,9 @@ namespace VeloMaxBDD
             }
             #endregion
             
-            #region // lecture de la table particulier
-            List<Particulier> listeParticuliers = new List<Particulier>();
-            string requete6 = "Select * from particulier;";
-            MySqlCommand command6 = connexion.CreateCommand();
-            command6.CommandText = requete6;
-            MySqlDataReader reader6;
-            reader6 = command6.ExecuteReader();
-
-            while (reader6.Read())
-            {
-                for (int i = 0; i < reader6.FieldCount / 7; i = i + 7)
-                {
-                    listeParticuliers.Add(new Particulier(Convert.ToInt32(reader6.GetValue(i).ToString()), reader6.GetValue(i + 1).ToString(), reader6.GetValue(i + 2).ToString(), reader6.GetValue(i + 3).ToString(), reader6.GetValue(i + 4).ToString(), reader6.GetValue(i + 5).ToString(), reader6.GetValue(i + 6).ToString(), Convert.ToInt32(reader6.GetValue(i + 7).ToString())));
-                }
-            }
-            reader6.Close();
-            command6.Dispose();
-            /*
-            foreach (Particulier particulier in listeParticuliers)
-            {
-                Console.WriteLine(particulier.No_particulier + " | " + particulier.Nom_particulier + " | " + particulier.Prenom_particulier + " | " + particulier.Adresse_particulier + " | " + particulier.Tel_particulier + " | " + particulier.Mail_particulier + " | " + particulier.Date_souscription + " | " + particulier.No_programme);
-            }*/
-            #endregion
-            List<Particulier> clientEndSub = new List<Particulier>();
-            foreach (Particulier p in listeParticuliers)
-            {
-                
-                int duree = 0;
-                //DateTime ds = Convert.ToDateTime(p.Date_souscription);
-                if (p.No_programme==0) { duree = 0; }
-                if (p.No_programme == 1) { duree = 1; }
-                if (p.No_programme == 2 || p.No_programme==3) { duree = 2; }
-                if (p.No_programme == 4) { duree = 3; }
-                if (duree != 0 && (Convert.ToDateTime(p.Date_souscription).AddYears(duree).CompareTo(DateTime.Today)==1 && (Convert.ToDateTime(p.Date_souscription).AddYears(duree).AddMonths(-2)).CompareTo(DateTime.Today)==1 || Convert.ToDateTime(p.Date_souscription).AddYears(duree).CompareTo(DateTime.Today)==-1))
-                {
-                    Console.WriteLine(p.Date_souscription + p.Nom_particulier);
-                }
-
-            }
             
-            //string fileToWrite = "C:/Users/vaymo/Documents/ESILV/A3/BDD et interop/Probleme final/Particulier.json";
-            //StreamWriter fileWriter = new StreamWriter(fileToWrite);
-            //JsonTextWriter jsonWriter = new JsonTextWriter(fileWriter);
-
-            //// sérialisation des objets vers le flux d'écriture fichier
-            //JsonSerializer serializer = new JsonSerializer();
-            //serializer.Serialize(jsonWriter, listeParticuliers);
-
-            ////fermture des flux (writer)
-            //jsonWriter.Close();
-            //fileWriter.Close();
-            //Choix_interface(connexion);
+            
+            Choix_interface(connexion);
 
             connexion.Close();
             Console.ReadKey();
@@ -163,6 +114,7 @@ namespace VeloMaxBDD
                 Lecture_rec(e);
             }
         }
+
 
         static void Lecture_rec(XmlNode e)
         {
@@ -336,8 +288,47 @@ namespace VeloMaxBDD
                 Console.WriteLine(particulier.No_particulier + " | " + particulier.Nom_particulier + " | " + particulier.Prenom_particulier + " | " + particulier.Adresse_particulier + " | " + particulier.Tel_particulier + " | " + particulier.Mail_particulier + " | " + particulier.Date_souscription + " | " + particulier.No_programme);
             }*/
             #endregion
+            XmlDocument docXml = new XmlDocument();
+            XmlElement racine = docXml.CreateElement("stocksFaibles");
+            docXml.AppendChild(racine);
+            XmlDeclaration xmldecl = docXml.CreateXmlDeclaration("1.0", "UTF-8", "no");
+            docXml.InsertBefore(xmldecl, racine);
+            void exportPieceXML(Piece p)
+            {
+                XmlElement Piece = docXml.CreateElement("Piece");
+                racine.AppendChild(Piece);
 
+                XmlAttribute no = docXml.CreateAttribute("no");
+                no.Value = p.no_piece;
+                Piece.SetAttributeNode(no);
+
+                XmlElement description = docXml.CreateElement("description");
+                description.InnerText = p.desc_piece;
+                Piece.AppendChild(description);
+
+                XmlElement introduction = docXml.CreateElement("introduction");
+                introduction.InnerText = p.Date_intro_piece;
+                Piece.AppendChild(introduction);
+
+                XmlElement discontinuité = docXml.CreateElement("discontinuité");
+                discontinuité.InnerText = p.Date_disco_piece;
+                Piece.AppendChild(discontinuité);
+
+                XmlElement prix = docXml.CreateElement("prix");
+                prix.InnerText = p.Prix_piece.ToString();
+                Piece.AppendChild(prix);
+
+                XmlElement stock = docXml.CreateElement("stock");
+                stock.InnerText = p.Stock.ToString();
+                Piece.AppendChild(stock);
+
+                XmlElement fournisseur = docXml.CreateElement("fournisseur");
+                fournisseur.InnerText = Connection.selectUnique("select l.siret_fournisseur from livraison l join piece p on l.no_piece=p.no_piece where p.no_piece='" + p.No_piece + "';");
+                Piece.AppendChild(fournisseur);
+            }
             
+
+
             bool quit = false;
             while (quit == false)
             {
@@ -351,7 +342,7 @@ namespace VeloMaxBDD
                 Console.WriteLine();
                 Console.WriteLine("Que souhaitez vous faire ?");
                 Console.WriteLine();
-                Console.WriteLine("1. Gestion des pièces\n2. Gestion des vélos \n3. Gestion des clients particuliers \n4. Gestion des clients boutique \n5. Gestion des fournisseurs \n6. Gestion des commandes \n7. Gestion des stocks \n8. Module statistique \n9. Export des stocks faibles avec fournisseurs pour command en XML \n10. Export des clients dont le programme de fidélité arrive à expiration dans moins de 2 mois \n11. Mode démo \n12. Quitter");
+                Console.WriteLine("1. Gestion des pièces\n2. Gestion des vélos \n3. Gestion des clients particuliers \n4. Gestion des clients boutique \n5. Gestion des fournisseurs \n6. Gestion des commandes \n7. Gestion des stocks \n8. Module statistique \n9. Export des stocks faibles avec fournisseurs pour command en XML \n10. Export des clients dont le programme de fidélité arrive à expiration dans moins de 2 mois en JSON \n11. Mode démo \n12. Quitter");
                 int caseSwitch = Convert.ToInt32(Console.ReadLine());
                 switch (caseSwitch)
                 {
@@ -427,11 +418,7 @@ namespace VeloMaxBDD
                                 Console.WriteLine();
                                 Console.WriteLine("Choisissez le N° de pièce que vous voulez modifier :");
                                 Console.WriteLine();
-                                foreach (Piece pice in listePieces)
-                                {
-                                    Console.WriteLine(pice.No_piece);
-                                }
-                                Console.WriteLine();
+                                
                                 string nummodif = Convert.ToString(Console.ReadLine());
                                 Console.WriteLine("Que voulez vous modifier ?");
                                 Console.WriteLine("1. N° Piece \n2. Description \n3. Date introduction \n4. Date discontinuation \n5. Prix \n6. Stock");
@@ -1863,20 +1850,84 @@ namespace VeloMaxBDD
                         
 
                         break;
-
+                      
                     case 9:
                         Console.WriteLine("------------------------------------------------------");
                         Console.WriteLine("Export des stocks faibles avec fournisseurs en .XML..." );
                         Console.WriteLine("------------------------------------------------------");
-                        //xml
+                        foreach (Piece p in listePieces)
+                        {
+                            if (p.Stock <= 2)
+                            {
+                                exportPieceXML(p);
+                            }
+                        }
+                        docXml.Save("C:/Users/vaymo/Documents/ESILV/A3/BDD et interop/Probleme final/stocksFaibles.xml");
+                        Console.WriteLine("Fichier .XML a été généré dans le répertoire");
+                        Console.WriteLine();
+                        Console.WriteLine("Souhaitez vous afficher le fichier .XML ?  Oui (1)  Non (2)");
+                        int input2 = Convert.ToInt32(Console.ReadLine());
+                        if (input2 == 1)
+                        {
+                            Lecture("C:/Users/vaymo/Documents/ESILV/A3/BDD et interop/Probleme final/stocksFaibles.xml");
+                            Console.WriteLine();
+
+                        }
+                        if (input2 == 2)
+                        {
+
+                        }
                         Console.WriteLine("Appuyez sur entrée pour revenir au menu principal");
                         Console.WriteLine();
                         break;
+                        
+                       
                     case 10:
+                        
                         Console.WriteLine("-----------------------------------------------------------------------------------");
                         Console.WriteLine("Export de la liste des clients dont le programme expire dans les 2 mois en .JSON...");
                         Console.WriteLine("-----------------------------------------------------------------------------------");
-                        //json
+                        List<Particulier> clientEndSub = new List<Particulier>();
+                        foreach (Particulier p in listeParticuliers)
+                        {
+
+                            int duree = 0;
+                            
+                            if (p.No_programme == 0) { duree = 0; }
+                            if (p.No_programme == 1) { duree = 1; }
+                            if (p.No_programme == 2 || p.No_programme == 3) { duree = 2; }
+                            if (p.No_programme == 4) { duree = 3; }
+                            if (duree != 0 && (Convert.ToDateTime(p.Date_souscription).AddYears(duree).CompareTo(DateTime.Today) == 1) && (Convert.ToDateTime(p.Date_souscription).AddYears(duree).AddMonths(-2).CompareTo(DateTime.Today) == -1) || Convert.ToDateTime(p.Date_souscription).AddYears(duree).CompareTo(DateTime.Today) == -1)
+                            {
+                                clientEndSub.Add(p);
+                            }
+
+                        }
+
+                        string fileToWrite = "C:/Users/vaymo/Documents/ESILV/A3/BDD et interop/Probleme final/Particulier.json";
+                        StreamWriter fileWriter = new StreamWriter(fileToWrite);
+                        JsonTextWriter jsonWriter = new JsonTextWriter(fileWriter);
+
+                        // sérialisation des objets vers le flux d'écriture fichier
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(jsonWriter, clientEndSub);
+                        Console.WriteLine("Fichier .JSON a été généré dans le répertoire");
+                        Console.WriteLine();
+                        //fermture des flux (writer)
+                        jsonWriter.Close();
+                        fileWriter.Close();
+                        Console.WriteLine("Souhaitez vous afficher le fichier .JSON ?  Oui (1)  Non (2)");
+                        int input = Convert.ToInt32(Console.ReadLine());
+                        if (input == 1)
+                        {
+                            AfficherPrettyJson(fileToWrite);
+                            Console.WriteLine();
+                            
+                        }
+                        if (input==2)
+                        {
+
+                        }
                         Console.WriteLine("Appuyez sur entrée pour revenir au menu principal");
                         Console.WriteLine();
                         break;
@@ -1976,17 +2027,17 @@ namespace VeloMaxBDD
                             Console.WriteLine("Export de la table Modèle en JSON...");
                             Console.WriteLine("------------------------------------");
                             Console.WriteLine();
-                            string fileToWrite = "C:/Users/vaymo/Documents/ESILV/A3/BDD et interop/Probleme final/Piece.json";
-                            StreamWriter fileWriter = new StreamWriter(fileToWrite);
-                            JsonTextWriter jsonWriter = new JsonTextWriter(fileWriter);
+                            string fileToWrite2 = "C:/Users/vaymo/Documents/ESILV/A3/BDD et interop/Probleme final/Piece.json";
+                            StreamWriter fileWriter2 = new StreamWriter(fileToWrite2);
+                            JsonTextWriter jsonWriter2 = new JsonTextWriter(fileWriter2);
 
                             // sérialisation des objets vers le flux d'écriture fichier
-                            JsonSerializer serializer = new JsonSerializer();
-                            serializer.Serialize(jsonWriter, listePieces);
+                            JsonSerializer serializer2 = new JsonSerializer();
+                            serializer2.Serialize(jsonWriter2, listePieces);
 
                             //fermture des flux (writer)
-                            jsonWriter.Close();
-                            fileWriter.Close();
+                            jsonWriter2.Close();
+                            fileWriter2.Close();
                             Console.WriteLine("-----------------------------------------------------");
                             Console.WriteLine("Le fichier .JSON a bien été généré dans le répertoire");
                             Console.WriteLine("-----------------------------------------------------");
@@ -2008,8 +2059,8 @@ namespace VeloMaxBDD
                         {
                             Console.WriteLine();
                             
-                            string fileToWrite = "C:/Users/vaymo/Documents/ESILV/A3/BDD et interop/Probleme final/Piece.json";
-                            AfficherPrettyJson(fileToWrite);
+                            string fileToWrite2 = "C:/Users/vaymo/Documents/ESILV/A3/BDD et interop/Probleme final/Piece.json";
+                            AfficherPrettyJson(fileToWrite2);
                             Console.WriteLine();
                             Console.WriteLine("Appuyez sur entrée pour revenir au menu principal");
                             Console.WriteLine();
@@ -2025,5 +2076,6 @@ namespace VeloMaxBDD
             }
 
         }
+
     }
 }
