@@ -285,9 +285,9 @@ namespace VeloMaxBDD
                 stock.InnerText = p.Stock.ToString();
                 Piece.AppendChild(stock);
 
-                //XmlElement fournisseur = docXml.CreateElement("fournisseur");
-                //fournisseur.InnerText = Connection.select("select l.siret_fournisseur from livraison l join piece p on l.no_piece=p.no_piece where p.no_piece='" + p.No_piece + "';");
-                //Piece.AppendChild(fournisseur);
+                XmlElement fournisseur = docXml.CreateElement("fournisseur");
+                fournisseur.InnerText = Connection.selectUnique("select l.siret_fournisseur from livraison l join piece p on l.no_piece=p.no_piece where p.no_piece='" + p.No_piece + "';");
+                Piece.AppendChild(fournisseur);
             }
             foreach (Piece p in listePieces)
             {
